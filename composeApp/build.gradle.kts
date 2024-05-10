@@ -65,7 +65,7 @@ kotlin {
             implementation(libs.voyager.navigator)
             implementation(libs.napier)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.moko.mvvm)
+            implementation(libs.lifecycle.viewmodel.compose)
             implementation(libs.ktor.core)
             implementation(libs.ktor.client.content.negociation)
             implementation(libs.ktor.client.serialization.json)
