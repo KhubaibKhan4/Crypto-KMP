@@ -1,7 +1,7 @@
-package org.company.app.domain
+package org.company.app.data.repository
 
 import org.company.app.domain.model.crypto.LatestListing
 
-interface CrytpoApi {
+interface CryptoApi {
     suspend fun getLatestListing(): LatestListing
 }
