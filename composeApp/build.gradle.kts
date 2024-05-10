@@ -62,6 +62,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(compose.materialIconsExtended)
             implementation(libs.voyager.navigator)
             implementation(libs.napier)
             implementation(libs.kotlinx.coroutines.core)
