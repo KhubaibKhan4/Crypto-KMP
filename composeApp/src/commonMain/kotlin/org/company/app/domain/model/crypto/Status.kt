@@ -13,9 +13,9 @@ data class Status(
     @SerialName("error_code")
     val errorCode: Int = 0,
     @SerialName("error_message")
-    val errorMessage: Any? = null,
+    val errorMessage: String? = null,
     @SerialName("notice")
-    val notice: Any? = null,
+    val notice: String? = null,
     @SerialName("timestamp")
     val timestamp: String = "",
     @SerialName("total_count")
