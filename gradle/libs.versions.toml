@@ -1,5 +1,6 @@
 [versions]
 
+kamelImage = "0.9.4"
 kotlin = "1.9.23"
 compose = "1.6.2"
 agp = "8.2.2"
@@ -21,6 +22,7 @@ sqlDelight = "2.0.1"
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
 androidx-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
+kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
 lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }

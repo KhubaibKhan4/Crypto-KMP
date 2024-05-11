@@ -77,6 +77,7 @@ kotlin {
             implementation("io.insert-koin:koin-core")
             implementation("io.insert-koin:koin-compose")
             implementation("io.insert-koin:koin-annotations:1.3.1")
+            implementation(libs.kamel.image)
         }
 
         commonTest.dependencies {
