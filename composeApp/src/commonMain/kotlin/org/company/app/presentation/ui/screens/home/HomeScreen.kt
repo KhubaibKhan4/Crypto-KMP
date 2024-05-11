@@ -143,14 +143,21 @@ fun HomeScreen(
             ) {
                 listingData?.data?.let { dataList ->
                     if (dataList.isNotEmpty()) {
-                        val combinedFilteredList =
-                            dataList.filter { it.id == 1 || it.id == 6 || it.id == 8 || it.id == 30 }
+                        val combinedFilteredList = mutableListOf<Data>()
+                        if (dataList.size > 0) {
+                            combinedFilteredList.add(dataList[0])
+                        }
+                        if (dataList.size > 12) {
+                            combinedFilteredList.add(dataList[12])
+                        }
+
                         CryptoList(
                             dataList = combinedFilteredList,
                             coinsText = "Favourite",
                             viewText = "Large Cap",
                             largeCapColor = Color(0xFFc127d9)
                         )
+                        Spacer(modifier = Modifier.height(4.dp))
                         CryptoList(
                             dataList = dataList,
                             coinsText = "All Coins",
