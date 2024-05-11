@@ -122,6 +122,7 @@ fun HomeScreen(
                 },
                 modifier = Modifier.fillMaxWidth()
                     .height(49.dp)
+                    .padding(all = 4.dp)
             )
         }
     ) {
