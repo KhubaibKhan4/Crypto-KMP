@@ -1,4 +1,8 @@
-# Compose Multiplatform Application
+# YouTube Clone Kotlin Multiplatform
+![Crypto KMP](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/poster.png)
+
+## Overview
+Crypto-KMP is a Kotlin Multiplatform (KMP) project aimed at providing cryptocurrency-related functionalities across Android, iOS, Web, and Desktop platforms with shared code. This documentation provides an overview of the project structure, features, and usage instructions.
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
