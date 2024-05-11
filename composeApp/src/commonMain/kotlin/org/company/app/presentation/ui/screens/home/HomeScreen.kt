@@ -1,6 +1,7 @@
 package org.company.app.presentation.ui.screens.home
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,9 +11,13 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.WbSunny
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -28,11 +33,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.company.app.domain.model.crypto.Data
 import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.usecase.ResultState
@@ -42,7 +50,7 @@ import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.theme.LocalThemeIsDark
 import org.koin.compose.koinInject
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     viewModel: MainViewModel = koinInject(),
@@ -50,6 +58,16 @@ fun HomeScreen(
     var isDark by LocalThemeIsDark.current
     var listingData by remember { mutableStateOf<LatestListing?>(null) }
     var queryText by remember { mutableStateOf("") }
+    val refreshScope = rememberCoroutineScope()
+    var refreshing by remember { mutableStateOf(false) }
+    fun refresh() {
+        refreshScope.launch {
+            delay(1500)
+            viewModel.getLatestListing()
+            refreshing = false
+        }
+    }
+    val refreshState = rememberPullRefreshState(refreshing,::refresh)
     LaunchedEffect(Unit) {
         viewModel.getLatestListing()
     }
@@ -100,20 +118,31 @@ fun HomeScreen(
             )
         }
     ) {
-        Column(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .windowInsetsPadding(WindowInsets.safeDrawing)
-                .padding(top = it.calculateTopPadding()),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .pullRefresh(state = refreshState)
         ) {
-            listingData?.data?.let { dataList ->
-                if (dataList.isNotEmpty()) {
-                    CryptoList(dataList = dataList)
-                } else {
-                    Text(text = "No data available.")
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .windowInsetsPadding(WindowInsets.safeDrawing)
+                    .padding(top = it.calculateTopPadding()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                listingData?.data?.let { dataList ->
+                    if (dataList.isNotEmpty()) {
+                        CryptoList(dataList = dataList)
+                    } else {
+                        Text(text = "No data available.")
+                    }
                 }
             }
+            PullRefreshIndicator(
+                refreshing = refreshing,
+                state = refreshState,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+            )
         }
     }
 }
