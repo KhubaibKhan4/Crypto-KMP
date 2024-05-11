@@ -96,7 +96,7 @@ fun HomeScreen(
                     )
                 },
                 modifier = Modifier.fillMaxWidth()
-                    .height(56.dp)
+                    .height(49.dp)
             )
         }
     ) {
