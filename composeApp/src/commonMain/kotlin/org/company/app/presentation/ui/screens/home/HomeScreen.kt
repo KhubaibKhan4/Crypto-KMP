@@ -52,7 +52,7 @@ import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.usecase.ResultState
 import org.company.app.presentation.ui.components.ErrorBox
 import org.company.app.presentation.ui.components.LoadingBox
-import org.company.app.presentation.ui.components.NetWorkImage
+import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.theme.LocalThemeIsDark
 import org.koin.compose.koinInject
@@ -192,7 +192,7 @@ fun CryptoItem(data: Data) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                NetWorkImage(
+                CurrencyImage(
                     id = data.id,
                     modifier = Modifier.size(35.dp)
                 )
