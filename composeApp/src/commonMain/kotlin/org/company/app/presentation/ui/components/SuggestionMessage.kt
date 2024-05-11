@@ -1,5 +1,6 @@
 package org.company.app.presentation.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,9 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ThumbDown
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,11 +21,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import crypto_kmp.composeapp.generated.resources.Res
+import crypto_kmp.composeapp.generated.resources.thumbs_down
+import crypto_kmp.composeapp.generated.resources.thumbs_up
 import org.company.app.theme.LocalThemeIsDark
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SuggestionMessage() {
@@ -39,8 +41,7 @@ fun SuggestionMessage() {
             .background(
                 color = if (isDark) Color.DarkGray else Color.White,
                 shape = RoundedCornerShape(12.dp)
-            )
-            ,
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -75,11 +76,11 @@ fun SuggestionMessage() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     ThumbsIcon(
-                        icon = Icons.Filled.ThumbDown,
+                        icon = Res.drawable.thumbs_down,
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     ThumbsIcon(
-                        icon = Icons.Filled.ThumbUp,
+                        icon = Res.drawable.thumbs_up,
                     )
 
                 }
@@ -91,7 +92,7 @@ fun SuggestionMessage() {
 
 @Composable
 fun ThumbsIcon(
-    icon: ImageVector,
+    icon: DrawableResource,
     contentDes: String = "Thumbs",
 ) {
     Box(
@@ -99,12 +100,11 @@ fun ThumbsIcon(
             .background(color = Color.Gray, shape = CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        Icon(
+        Image(
             modifier = Modifier.fillMaxWidth()
                 .padding(6.dp),
-            imageVector = icon,
+            painter = painterResource(icon),
             contentDescription = contentDes,
-            tint = Color.Yellow
         )
     }
 }
