@@ -175,12 +175,12 @@ fun CryptoItem(data: Data) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -188,8 +188,8 @@ fun CryptoItem(data: Data) {
                 fontSize = MaterialTheme.typography.labelMedium.fontSize,
                 color = textColor
             )
+            Spacer(modifier = Modifier.width(50.dp))
             Row(
-                horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 NetWorkImage(
@@ -198,7 +198,7 @@ fun CryptoItem(data: Data) {
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = Alignment.Start,
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
                     Text(
@@ -215,12 +215,15 @@ fun CryptoItem(data: Data) {
                     )
                 }
             }
+            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f))
             Text(
-                text ="$"+ "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
+                text = "$" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                 fontWeight = FontWeight.Bold,
                 color = textColor
             )
+            Spacer(modifier = Modifier.weight(1f))
             val percentChange24h = data.quote.uSD.percentChange24h
             val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
             Text(
