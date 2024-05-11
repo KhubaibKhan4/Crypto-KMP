@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -143,7 +142,11 @@ fun HomeScreen(
             ) {
                 listingData?.data?.let { dataList ->
                     if (dataList.isNotEmpty()) {
-                        CryptoList(dataList = dataList)
+                        CryptoList(
+                            dataList = dataList,
+                            coinsText = "All Coins",
+                            viewText = "View All"
+                        )
                     } else {
                         Text(text = "No data available.")
                     }
@@ -160,11 +163,42 @@ fun HomeScreen(
 }
 
 @Composable
-fun CryptoList(dataList: List<Data>) {
-    LazyColumn {
-        items(dataList) { data ->
-            CryptoItem(data = data)
-            HorizontalDivider()
+fun CryptoList(
+    dataList: List<Data>,
+    coinsText: String,
+    viewText: String,
+) {
+    val isDark by LocalThemeIsDark.current
+    val textColor = if (isDark) Color.White else Color.Black
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(start = 3.dp, end = 3.dp),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = coinsText,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Bold,
+                color = textColor
+            )
+            Text(
+                text = viewText,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                color = textColor
+            )
+        }
+        LazyColumn {
+            items(dataList) { data ->
+                CryptoItem(data = data)
+                HorizontalDivider()
+            }
         }
     }
 }
