@@ -1,6 +1,5 @@
 package org.company.app.presentation.ui.screens.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,13 +19,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -48,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.company.app.domain.model.crypto.Data
@@ -174,29 +171,23 @@ fun CryptoList(dataList: List<Data>) {
 fun CryptoItem(data: Data) {
     val isDark by LocalThemeIsDark.current
     val textColor = if (isDark) Color.White else Color.Black
-    Card(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.Outlined.StarOutline,
-                contentDescription = "Favourite",
-                tint = textColor
-            )
-            Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = data.cmcRank.toString(),
                 fontSize = MaterialTheme.typography.labelMedium.fontSize,
                 color = textColor
             )
-            Spacer(modifier = Modifier.weight(1f))
             Row(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
@@ -206,34 +197,35 @@ fun CryptoItem(data: Data) {
                     modifier = Modifier.size(35.dp)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = data.name,
-                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor
-                )
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = data.symbol,
-                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Gray
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    Text(
+                        text = data.name,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = textColor
+                    )
+                    Text(
+                        text = data.symbol,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray
+                    )
+                }
             }
-            Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}$",
+                text ="$"+ "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                 fontWeight = FontWeight.Bold,
                 color = textColor
             )
-            Spacer(modifier = Modifier.weight(1f))
-
-            val percent = ((data.quote.uSD.percentChange24h * 100).toUInt()) / 100u
-            val textColor = if (percent > 0u) Color.Green else Color.Red
+            val percentChange24h = data.quote.uSD.percentChange24h
+            val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
             Text(
-                text = "${percent}%",
-                color = textColor
+                text = "${percentChange24h.roundToInt()}%",
+                color = textColor24h
             )
         }
     }
