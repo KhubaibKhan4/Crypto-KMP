@@ -1,19 +1,25 @@
 package org.company.app.presentation.ui.screens.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -37,6 +43,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -46,9 +54,11 @@ import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.usecase.ResultState
 import org.company.app.presentation.ui.components.ErrorBox
 import org.company.app.presentation.ui.components.LoadingBox
+import org.company.app.presentation.ui.components.NetWorkImage
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.theme.LocalThemeIsDark
 import org.koin.compose.koinInject
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -67,7 +77,8 @@ fun HomeScreen(
             refreshing = false
         }
     }
-    val refreshState = rememberPullRefreshState(refreshing,::refresh)
+
+    val refreshState = rememberPullRefreshState(refreshing, ::refresh)
     LaunchedEffect(Unit) {
         viewModel.getLatestListing()
     }
@@ -165,13 +176,57 @@ fun CryptoItem(data: Data) {
             .padding(8.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Name: ${data.name}")
-            Text(text = "Symbol: ${data.symbol}")
-            Text(text = "Rank: ${data.cmcRank}")
-            Text(text = "Price: $${data.quote.uSD.price}")
+            Image(
+                imageVector = Icons.Outlined.StarOutline,
+                contentDescription = "Favourite",
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = data.cmcRank.toString(),
+                fontSize = MaterialTheme.typography.labelMedium.fontSize
+            )
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                NetWorkImage(
+                    id = data.id,
+                    modifier = Modifier.size(40.dp)
+                )
+                Text(
+                    text = data.name,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+                Text(
+                    text = data.symbol,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Gray
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}$",
+                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.weight(1f))
+
+            val percent = ((data.quote.uSD.percentChange24h * 100).toUInt()) / 100u
+            val textColor = if (percent > 0u) Color.Green else Color.Red
+            Text(
+                text = "${percent}%",
+                color = textColor
+            )
         }
     }
 }
