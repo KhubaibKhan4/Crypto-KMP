@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -50,9 +51,10 @@ import kotlinx.coroutines.launch
 import org.company.app.domain.model.crypto.Data
 import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.usecase.ResultState
+import org.company.app.presentation.ui.components.ChartImage
+import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.presentation.ui.components.ErrorBox
 import org.company.app.presentation.ui.components.LoadingBox
-import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.theme.LocalThemeIsDark
 import org.koin.compose.koinInject
@@ -171,6 +173,8 @@ fun CryptoList(dataList: List<Data>) {
 fun CryptoItem(data: Data) {
     val isDark by LocalThemeIsDark.current
     val textColor = if (isDark) Color.White else Color.Black
+    val percentChange24h = data.quote.uSD.percentChange24h
+    val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -216,20 +220,28 @@ fun CryptoItem(data: Data) {
                 }
             }
             Spacer(modifier = Modifier.weight(1f))
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = "$" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
-                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                fontWeight = FontWeight.Bold,
-                color = textColor
+            ChartImage(
+                id = data.id,
+                modifier = Modifier.fillMaxWidth(0.3f),
+                tintColor = textColor24h
             )
             Spacer(modifier = Modifier.weight(1f))
-            val percentChange24h = data.quote.uSD.percentChange24h
-            val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
-            Text(
-                text = "${percentChange24h.roundToInt()}%",
-                color = textColor24h
-            )
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "$" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
+                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                    fontWeight = FontWeight.Bold,
+                    color = textColor
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = "${percentChange24h.roundToInt()}%",
+                    color = textColor24h
+                )
+            }
         }
     }
 }
