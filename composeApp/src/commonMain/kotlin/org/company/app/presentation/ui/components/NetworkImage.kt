@@ -24,9 +24,6 @@ fun NetWorkImage(
         contentDescription = null,
         modifier = modifier,
         contentScale = ContentScale.FillBounds,
-        onLoading = {
-            CircularProgressIndicator()
-        },
         onFailure = {
             Text("image request failed")
         },

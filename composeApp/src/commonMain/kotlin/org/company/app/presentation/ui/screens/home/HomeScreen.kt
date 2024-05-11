@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -131,6 +132,7 @@ fun HomeScreen(
     ) {
         Box(
             modifier = Modifier
+                .fillMaxWidth()
                 .pullRefresh(state = refreshState)
         ) {
             Column(
@@ -191,21 +193,22 @@ fun CryptoItem(data: Data) {
                 fontSize = MaterialTheme.typography.labelMedium.fontSize
             )
             Spacer(modifier = Modifier.weight(1f))
-
             Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 NetWorkImage(
                     id = data.id,
-                    modifier = Modifier.size(40.dp)
+                    modifier = Modifier.size(35.dp)
                 )
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = data.name,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = data.symbol,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
