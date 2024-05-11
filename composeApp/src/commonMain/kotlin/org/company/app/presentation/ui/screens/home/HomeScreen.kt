@@ -172,6 +172,8 @@ fun CryptoList(dataList: List<Data>) {
 
 @Composable
 fun CryptoItem(data: Data) {
+    val isDark by LocalThemeIsDark.current
+    val textColor = if (isDark) Color.White else Color.Black
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -183,14 +185,16 @@ fun CryptoItem(data: Data) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
+            Icon(
                 imageVector = Icons.Outlined.StarOutline,
                 contentDescription = "Favourite",
+                tint = textColor
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = data.cmcRank.toString(),
-                fontSize = MaterialTheme.typography.labelMedium.fontSize
+                fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                color = textColor
             )
             Spacer(modifier = Modifier.weight(1f))
             Row(
@@ -206,7 +210,7 @@ fun CryptoItem(data: Data) {
                     text = data.name,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = textColor
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
@@ -220,7 +224,8 @@ fun CryptoItem(data: Data) {
             Text(
                 text = "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}$",
                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = textColor
             )
             Spacer(modifier = Modifier.weight(1f))
 
