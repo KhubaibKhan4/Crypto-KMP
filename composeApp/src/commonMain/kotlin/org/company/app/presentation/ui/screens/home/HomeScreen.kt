@@ -51,6 +51,7 @@ import org.company.app.domain.usecase.ResultState
 import org.company.app.presentation.ui.components.CryptoList
 import org.company.app.presentation.ui.components.ErrorBox
 import org.company.app.presentation.ui.components.LoadingBox
+import org.company.app.presentation.ui.components.SuggestionMessage
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.theme.LocalThemeIsDark
 import org.koin.compose.koinInject
@@ -179,7 +180,9 @@ fun HomeScreen(
                             largeCapColor = Color(0xFFc127d9),
                             isCapIconEnabled = true
                         )
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
+                        SuggestionMessage()
+                        Spacer(modifier = Modifier.height(8.dp))
                         CryptoList(
                             dataList = dataList,
                             coinsText = "All Coins",
