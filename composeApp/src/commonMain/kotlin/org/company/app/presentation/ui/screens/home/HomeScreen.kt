@@ -138,10 +138,19 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .windowInsetsPadding(WindowInsets.safeDrawing)
                     .padding(top = it.calculateTopPadding()),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 listingData?.data?.let { dataList ->
                     if (dataList.isNotEmpty()) {
+                        val combinedFilteredList =
+                            dataList.filter { it.id == 1 || it.id == 6 || it.id == 8 || it.id == 30 }
+                        CryptoList(
+                            dataList = combinedFilteredList,
+                            coinsText = "Favourite",
+                            viewText = "Large Cap",
+                            largeCapColor = Color(0xFFc127d9)
+                        )
                         CryptoList(
                             dataList = dataList,
                             coinsText = "All Coins",
@@ -167,6 +176,7 @@ fun CryptoList(
     dataList: List<Data>,
     coinsText: String,
     viewText: String,
+    largeCapColor: Color = Color.Black,
 ) {
     val isDark by LocalThemeIsDark.current
     val textColor = if (isDark) Color.White else Color.Black
@@ -191,7 +201,7 @@ fun CryptoList(
                 text = viewText,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = textColor
+                color = largeCapColor
             )
         }
         LazyColumn {
