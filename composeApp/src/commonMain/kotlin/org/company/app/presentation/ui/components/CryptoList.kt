@@ -141,7 +141,7 @@ fun CryptoItem(data: Data) {
             Spacer(modifier = Modifier.weight(1f))
             ChartImage(
                 id = data.id,
-                modifier = Modifier.fillMaxWidth(0.3f),
+                modifier = Modifier.fillMaxWidth(0.40f),
                 tintColor = textColor24h
             )
             Spacer(modifier = Modifier.weight(1f))
