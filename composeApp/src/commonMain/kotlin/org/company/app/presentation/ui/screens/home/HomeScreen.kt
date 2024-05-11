@@ -1,5 +1,6 @@
 package org.company.app.presentation.ui.screens.home
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.ArrowDownward
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.WbSunny
@@ -44,6 +48,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -151,7 +156,7 @@ fun HomeScreen(
                     onValueChange = {
                         queryText = it
                     },
-                    placeholder = { Text(text = "Search") },
+                    placeholder = { Text(text = "Search Coins") },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.Search,
@@ -184,7 +189,8 @@ fun HomeScreen(
                             dataList = combinedFilteredList,
                             coinsText = "Favourite",
                             viewText = "Large Cap",
-                            largeCapColor = Color(0xFFc127d9)
+                            largeCapColor = Color(0xFFc127d9),
+                            isCapIconEnabled = true
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         CryptoList(
@@ -213,6 +219,7 @@ fun CryptoList(
     coinsText: String,
     viewText: String,
     largeCapColor: Color = Color.Black,
+    isCapIconEnabled: Boolean = false,
 ) {
     val isDark by LocalThemeIsDark.current
     val textColor = if (isDark) Color.White else Color.Black
@@ -233,12 +240,25 @@ fun CryptoList(
                 fontWeight = FontWeight.Bold,
                 color = textColor
             )
-            Text(
-                text = viewText,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = largeCapColor
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = viewText,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = largeCapColor
+                )
+                AnimatedVisibility (isCapIconEnabled){
+                    Icon(
+                        modifier = Modifier.size(25.dp),
+                        imageVector = Icons.Default.KeyboardArrowDown,
+                        contentDescription = null,
+                        tint = largeCapColor
+                    )
+                }
+            }
         }
         Column(
             modifier = Modifier
