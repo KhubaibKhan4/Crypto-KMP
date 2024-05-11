@@ -1,4 +1,4 @@
-# YouTube Clone Kotlin Multiplatform
+# Crypto KMP
 ![Crypto KMP](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/poster.png)
 
 ## Overview
