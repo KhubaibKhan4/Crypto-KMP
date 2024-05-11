@@ -191,3 +191,4 @@ sqldelight {
         }
     }
 }
+task("testClasses"){}
