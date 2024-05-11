@@ -2,6 +2,7 @@ package org.company.app.presentation.ui.components
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,10 +28,15 @@ fun ChartImage(
         modifier = modifier,
         contentScale = ContentScale.FillBounds,
         animationSpec = tween(
-            durationMillis = 1500,
+            durationMillis = 300,
             delayMillis = 300,
             easing = LinearOutSlowInEasing
         ),
-        colorFilter = ColorFilter.tint(color = tintColor)
+        colorFilter = ColorFilter.tint(color = tintColor),
+        onLoading = {
+            LinearProgressIndicator(
+                progress = { it },
+            )
+        }
     )
 }

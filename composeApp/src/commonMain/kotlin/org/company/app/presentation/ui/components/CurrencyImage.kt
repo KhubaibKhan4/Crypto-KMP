@@ -27,7 +27,7 @@ fun CurrencyImage(
             Text("image request failed")
         },
         animationSpec = tween(
-            durationMillis = 1500,
+            durationMillis = 300,
             delayMillis = 300,
             easing = LinearOutSlowInEasing
         )
