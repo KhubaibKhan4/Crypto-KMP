@@ -79,6 +79,7 @@ kotlin {
             implementation("io.insert-koin:koin-compose")
             implementation("io.insert-koin:koin-annotations:1.3.1")
             implementation(libs.kamel.image)
+            implementation("io.github.thechance101:chart:Beta-0.0.5")
         }
 
         commonTest.dependencies {
