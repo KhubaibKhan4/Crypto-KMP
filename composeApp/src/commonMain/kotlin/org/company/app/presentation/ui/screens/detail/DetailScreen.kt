@@ -22,6 +22,7 @@ import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -294,8 +295,62 @@ fun DetailContent(data: Data) {
 
                 }
             }
+            MarketData(data, isDark)
         }
 
+    }
+}
+
+@Composable
+fun MarketData(
+    data: Data,
+    isDark: Boolean,
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            text = "MARKET DATA",
+            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+            fontWeight = FontWeight.Bold,
+            color = if (isDark) Color.White else Color.Black,
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        HorizontalDivider(color = Color.LightGray)
+        Spacer(modifier = Modifier.height(6.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            MarketDataRow("MARKET CAP", data.quote.uSD.marketCap.toString(), isDark)
+            MarketDataRow("24H VOLUME", data.quote.uSD.volume24h.toString(), isDark)
+            MarketDataRow("RANK", data.cmcRank.toString(), isDark)
+        }
+    }
+}
+@Composable
+fun MarketDataRow(
+    title: String,
+    value: String,
+    isDark: Boolean,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = title,
+            fontSize = 14.sp,
+            color = Color.Gray
+        )
+        Text(
+            text = value,
+            fontSize = 17.sp,
+            color = if (isDark) Color.White else Color.Black
+        )
     }
 }
 
