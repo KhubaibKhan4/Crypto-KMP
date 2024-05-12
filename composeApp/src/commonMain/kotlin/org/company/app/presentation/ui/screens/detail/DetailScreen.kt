@@ -24,9 +24,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,6 +63,8 @@ class DetailScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailContent(data: Data) {
+    var selectedPeriod by remember { mutableStateOf("1H") }
+    val capList = remember { mutableListOf("1H", "1D", "1W", "1M", "3M", "6M", "1Y") }
     val isDark by LocalThemeIsDark.current
     val navigator = LocalNavigator.current
     val textColor = if (isDark) Color.White else Color.Black
@@ -211,6 +220,30 @@ fun DetailContent(data: Data) {
                     color = textColor1h,
                     fontSize = 16.sp
                 )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            TabRow(
+                selectedTabIndex = capList.indexOf(selectedPeriod),
+                containerColor = Color.White,
+                contentColor = Color.Black,
+                indicator = { tabPositions ->
+                    TabRowDefaults.Indicator(
+                        modifier = Modifier.tabIndicatorOffset(
+                            tabPositions[capList.indexOf(
+                                selectedPeriod
+                            )]
+                        )
+                    )
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                capList.forEachIndexed { index, period ->
+                    Tab(
+                        selected = selectedPeriod == period,
+                        onClick = { selectedPeriod = period },
+                        text = { Text(text = period) },
+                    )
+                }
             }
         }
 
