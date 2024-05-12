@@ -78,7 +78,7 @@ fun DetailContent(data: Data) {
                         imageVector = Icons.Outlined.ArrowBackIosNew,
                         contentDescription = "Menu Icon",
                         modifier = Modifier.clickable {
-                            navigator?gi.pop()
+                            navigator?.pop()
                         }
                     )
                 },
