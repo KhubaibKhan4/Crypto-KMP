@@ -10,10 +10,10 @@ import java.awt.Dimension
 fun main() = application {
     Window(
         title = "Crypto-KMP",
-        state = rememberWindowState(width = 800.dp, height = 600.dp),
+        state = rememberWindowState(width = 1280.dp, height = 720.dp),
         onCloseRequest = ::exitApplication,
     ) {
-        window.minimumSize = Dimension(1280, 720)
+        window.minimumSize = Dimension(800, 600)
         startKoin {
             modules(appModule)
         }
