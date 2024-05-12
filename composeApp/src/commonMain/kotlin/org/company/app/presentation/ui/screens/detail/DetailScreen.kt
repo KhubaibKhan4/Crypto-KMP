@@ -3,12 +3,14 @@ package org.company.app.presentation.ui.screens.detail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -28,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import org.company.app.domain.model.crypto.Data
 import org.company.app.presentation.ui.components.CurrencyImage
@@ -96,12 +97,14 @@ fun DetailContent(data: Data) {
                     id = data.id,
                     modifier = Modifier.size(30.dp)
                 )
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = data.name,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    fontWeight = FontWeight.Bold,
                 )
             }
+
         }
 
     }
