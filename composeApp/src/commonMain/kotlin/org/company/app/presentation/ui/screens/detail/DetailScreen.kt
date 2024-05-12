@@ -69,9 +69,9 @@ fun DetailContent(data: Data) {
     val navigator = LocalNavigator.current
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
-    val percentChange1h = data.quote.uSD.percentChange1h
+    val capMarket = data.quote.uSD.percentChange30d
     val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
-    val textColor1h = if (percentChange1h > 0) Color.Green else Color.Red
+    val textColor1h = if (capMarket > 0) Color.Green else Color.Red
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -216,7 +216,7 @@ fun DetailContent(data: Data) {
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
-                    text = "${percentChange1h.roundToInt()}%",
+                    text = "${capMarket.roundToInt()}%",
                     color = textColor1h,
                     fontSize = 16.sp
                 )
@@ -244,6 +244,30 @@ fun DetailContent(data: Data) {
                         text = { Text(text = period) },
                     )
                 }
+            }
+            when(selectedPeriod) {
+                "1H" -> {
+                    Text("1H Selected")
+                }
+                "1D" -> {
+                    Text("1D Selected")
+                }
+                "1W" -> {
+                    Text("1W Selected")
+                }
+                "1M" -> {
+                    Text("1M Selected")
+                }
+                "3M" -> {
+                    Text("3M Selected")
+                }
+                "6M" -> {
+                    Text("6M Selected")
+                }
+                "1Y" -> {
+                    Text("1Y Selected")
+                }
+
             }
         }
 
