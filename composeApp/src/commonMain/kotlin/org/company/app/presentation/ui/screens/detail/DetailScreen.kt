@@ -2,12 +2,10 @@ package org.company.app.presentation.ui.screens.detail
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,7 +13,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -23,6 +20,7 @@ import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -50,10 +48,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import com.aay.compose.barChart.BarChart
-import com.aay.compose.barChart.model.BarParameters
 import com.aay.compose.baseComponents.model.GridOrientation
 import com.aay.compose.baseComponents.model.LegendPosition
+import com.aay.compose.donutChart.PieChart
+import com.aay.compose.donutChart.model.PieChartData
 import com.aay.compose.lineChart.LineChart
 import com.aay.compose.lineChart.model.LineParameters
 import com.aay.compose.lineChart.model.LineType
@@ -260,7 +258,7 @@ fun DetailContent(data: Data) {
             }
             Column(
                 modifier = Modifier.fillMaxWidth()
-                    .height(300.dp),
+                    .height(330.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -315,6 +313,7 @@ fun CryptoChart(
             dataList.quote.uSD.percentChange60d,
             dataList.quote.uSD.percentChange90d,
         )
+
         "1D" -> listOf(
             Random.nextDouble(0.0, 7.0),
             dataList.quote.uSD.percentChange24h,
@@ -323,6 +322,7 @@ fun CryptoChart(
             dataList.quote.uSD.percentChange60d,
             dataList.quote.uSD.percentChange90d,
         )
+
         "1W" -> listOf(
             Random.nextDouble(0.0, 7.0),
             Random.nextDouble(0.0, 7.0),
@@ -331,6 +331,7 @@ fun CryptoChart(
             dataList.quote.uSD.percentChange60d,
             dataList.quote.uSD.percentChange90d,
         )
+
         "1M" -> listOf(
             Random.nextDouble(0.0, 7.0),
             Random.nextDouble(0.0, 7.0),
@@ -339,6 +340,7 @@ fun CryptoChart(
             dataList.quote.uSD.percentChange60d,
             dataList.quote.uSD.percentChange90d,
         )
+
         "3M" -> listOf(
             Random.nextDouble(0.0, 7.0),
             Random.nextDouble(0.0, 7.0),
@@ -347,6 +349,7 @@ fun CryptoChart(
             dataList.quote.uSD.percentChange60d,
             dataList.quote.uSD.percentChange90d,
         )
+
         "6M" -> listOf(
             Random.nextDouble(0.0, 7.0),
             Random.nextDouble(0.0, 7.0),
@@ -355,6 +358,7 @@ fun CryptoChart(
             Random.nextDouble(0.0, 7.0),
             dataList.quote.uSD.percentChange90d,
         )
+
         "1Y" -> listOf(
             Random.nextDouble(0.0, 7.0),
             Random.nextDouble(0.0, 7.0),
@@ -363,9 +367,11 @@ fun CryptoChart(
             Random.nextDouble(0.0, 7.0),
             dataList.quote.uSD.percentChange90d,
         )
+
         else -> emptyList()
     }
 
+    var isPieCharEnabled by remember { mutableStateOf(false) }
     val dataList1 = mutableListOf<Double>()
     dataList1.add(dataList.quote.uSD.percentChange1h)
     dataList1.add(dataList.quote.uSD.percentChange24h)
@@ -387,98 +393,102 @@ fun CryptoChart(
         )
     )
 
-    Box(Modifier.wrapContentWidth()) {
-        LineChart(
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        if (!isPieCharEnabled) {
+            LineChart(
+                modifier = Modifier.fillMaxWidth()
+                    .height(270.dp),
+                linesParameters = testLineParameters,
+                isGrid = false,
+                gridColor = Color.Blue,
+                xAxisData = listOf(
+                    "2016",
+                    "2018",
+                    "2020",
+                    "2022",
+                    "2023",
+                    "2024"
+                ),
+                animateChart = true,
+                showGridWithSpacer = true,
+                legendPosition = LegendPosition.TOP,
+                yAxisStyle = TextStyle(
+                    fontSize = 14.sp,
+                    color = Color.Gray,
+                ),
+                xAxisStyle = TextStyle(
+                    fontSize = 14.sp,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.W400
+                ),
+                yAxisRange = 6,
+                oneLineChart = false,
+                gridOrientation = GridOrientation.VERTICAL
+            )
+        } else {
+            val testPieChartData: List<PieChartData> = listOf(
+                PieChartData(
+                    partName = "1H",
+                    data = 40.32,
+                    color = Color(0xFF22A699),
+                ),
+                PieChartData(
+                    partName = "24H",
+                    data = 65.02,
+                    color = Color(0xFFF2BE22),
+                ),
+                PieChartData(
+                    partName = "7D",
+                    data = 42.32,
+                    color = Color(0xFFF29727),
+                ),
+                PieChartData(
+                    partName = "1M",
+                    data = 15.32,
+                    color = Color(0xFFF24C3D),
+                ),
+                PieChartData(
+                    partName = "2M",
+                    data = 90.2,
+                    color = Color(0xFFF24C3D),
+                ),
+                PieChartData(
+                    partName = "3M",
+                    data = 55.4,
+                    color = Color(0xFFF24C3D),
+                ),
+            )
+
+            PieChart(
+                modifier = Modifier.fillMaxWidth()
+                    .height(270.dp),
+                pieChartData = testPieChartData,
+                ratioLineColor = Color.LightGray,
+                textRatioStyle = TextStyle(color = Color.Gray),
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            linesParameters = testLineParameters,
-            isGrid = false,
-            gridColor = Color.Blue,
-            xAxisData = listOf(
-                "2016",
-                "2018",
-                "2020",
-                "2022",
-                "2023",
-                "2024"
-            ),
-            animateChart = true,
-            showGridWithSpacer = true,
-            legendPosition = LegendPosition.TOP,
-            yAxisStyle = TextStyle(
-                fontSize = 14.sp,
-                color = Color.Gray,
-            ),
-            xAxisStyle = TextStyle(
-                fontSize = 14.sp,
-                color = Color.Gray,
-                fontWeight = FontWeight.W400
-            ),
-            yAxisRange = 6,
-            oneLineChart = false,
-            gridOrientation = GridOrientation.VERTICAL
-        )
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = isPieCharEnabled,
+                onCheckedChange = {
+                    isPieCharEnabled = it
+                }
+            )
+            Text(
+                text = dataList.symbol + " Pie Chart",
+                fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
-}
-
-
-@Composable
-fun BarChartSample() {
-
-    val testBarParameters: List<BarParameters> = listOf(
-        BarParameters(
-            dataName = "Completed",
-            data = listOf(0.6, 10.6, 80.0, 50.6, 44.0, 100.6, 10.0),
-            barColor = Color(0xFF6C3428)
-        ),
-        BarParameters(
-            dataName = "Completed",
-            data = listOf(50.0, 30.6, 77.0, 69.6, 50.0, 30.6, 80.0),
-            barColor = Color(0xFFBA704F),
-        ),
-        BarParameters(
-            dataName = "Completed",
-            data = listOf(100.0, 99.6, 60.0, 80.6, 10.0, 100.6, 55.99),
-            barColor = Color(0xFFDFA878),
-        ),
-    )
-
-    Box(Modifier.fillMaxSize()) {
-        BarChart(
-            chartParameters = testBarParameters,
-            gridColor = Color.DarkGray,
-            xAxisData = listOf("2016", "2017", "2018", "2019", "2020", "2021", "2022"),
-            isShowGrid = true,
-            animateChart = true,
-            showGridWithSpacer = true,
-            yAxisStyle = TextStyle(
-                fontSize = 14.sp,
-                color = Color.DarkGray,
-            ),
-            xAxisStyle = TextStyle(
-                fontSize = 14.sp,
-                color = Color.DarkGray,
-                fontWeight = FontWeight.W400
-            ),
-            yAxisRange = 15,
-            barWidth = 20.dp
-        )
-    }
-}
-
-fun createDoubleList(
-    percentChange1h: Double,
-    percentChange24h: Double,
-    percentChange7d: Double,
-    percentChange30d: Double,
-    percentChange60d: Double,
-    percentChange1y: Double,
-): List<Double> {
-    return listOf(
-        percentChange1h,
-        percentChange24h,
-        percentChange7d,
-        percentChange30d,
-        percentChange60d,
-        percentChange1y
-    )
 }
