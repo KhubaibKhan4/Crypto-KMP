@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,7 +15,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -61,7 +60,9 @@ import com.aay.compose.lineChart.model.LineType
 import org.company.app.domain.model.crypto.Data
 import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.theme.LocalThemeIsDark
+import kotlin.math.abs
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 class DetailScreen(
     private val data: Data,
@@ -257,40 +258,48 @@ fun DetailContent(data: Data) {
                     )
                 }
             }
+            val listOfId = listOf(
+                data.quote.uSD.percentChange1h,
+                data.quote.uSD.percentChange24h,
+                data.quote.uSD.percentChange7d,
+                data.quote.uSD.percentChange30d,
+            )
 
+            val dataList = listOf(20.0, 44.15, 66.33, 35.0, 100.500)
             Column(
                 modifier = Modifier.fillMaxWidth()
-                    .fillMaxHeight(.40f),
+                    .height(300.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 when (selectedPeriod) {
                     "1H" -> {
-                        CryptoChart()
+                        CryptoChart(data, "1H")
                     }
 
                     "1D" -> {
-                        BarChartSample()
+                        CryptoChart(data, "1D")
+
                     }
 
                     "1W" -> {
-                        BarChartSample()
+                        CryptoChart(data, "1W")
                     }
 
                     "1M" -> {
-                        Text("1M Selected")
+                        CryptoChart(data, "1M")
                     }
 
                     "3M" -> {
-                        Text("3M Selected")
+                        CryptoChart(data, "3M")
                     }
 
                     "6M" -> {
-                        Text("6M Selected")
+                        CryptoChart(data, "6M")
                     }
 
                     "1Y" -> {
-                        Text("1Y Selected")
+                        CryptoChart(data, "1Y")
                     }
 
                 }
@@ -301,28 +310,103 @@ fun DetailContent(data: Data) {
 }
 
 @Composable
-fun CryptoChart() {
+fun CryptoChart(
+    dataList: Data,
+    selectedPeriod: String,
+) {
+    val relevantData = when (selectedPeriod) {
+        "1H" -> listOf(
+            dataList.quote.uSD.percentChange1h,
+            dataList.quote.uSD.percentChange24h,
+            dataList.quote.uSD.percentChange7d,
+            dataList.quote.uSD.percentChange30d,
+            dataList.quote.uSD.percentChange60d,
+            dataList.quote.uSD.percentChange90d,
+        )
+        "1D" -> listOf(
+            Random.nextDouble(0.0, 7.0),
+            dataList.quote.uSD.percentChange24h,
+            dataList.quote.uSD.percentChange7d,
+            dataList.quote.uSD.percentChange30d,
+            dataList.quote.uSD.percentChange60d,
+            dataList.quote.uSD.percentChange90d,
+        )
+        "1W" -> listOf(
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            dataList.quote.uSD.percentChange7d,
+            dataList.quote.uSD.percentChange30d,
+            dataList.quote.uSD.percentChange60d,
+            dataList.quote.uSD.percentChange90d,
+        )
+        "1M" -> listOf(
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            dataList.quote.uSD.percentChange30d,
+            dataList.quote.uSD.percentChange60d,
+            dataList.quote.uSD.percentChange90d,
+        )
+        "3M" -> listOf(
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            dataList.quote.uSD.percentChange60d,
+            dataList.quote.uSD.percentChange90d,
+        )
+        "6M" -> listOf(
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            dataList.quote.uSD.percentChange90d,
+        )
+        "1Y" -> listOf(
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            Random.nextDouble(0.0, 7.0),
+            dataList.quote.uSD.percentChange90d,
+        )
+        else -> emptyList()
+    }
+
+    val dataList1 = mutableListOf<Double>()
+    dataList1.add(dataList.quote.uSD.percentChange1h)
+    dataList1.add(dataList.quote.uSD.percentChange24h)
+    dataList1.add(dataList.quote.uSD.percentChange7d)
+    dataList1.add(dataList.quote.uSD.percentChange30d)
+    dataList1.add(dataList.quote.uSD.percentChange60d)
+    dataList1.add(dataList.quote.uSD.percentChange90d)
+    println("DataList: $dataList1")
+    val positiveDataList = relevantData.map { abs(it) }
+    println("DataList: $positiveDataList")
+
     val testLineParameters: List<LineParameters> = listOf(
         LineParameters(
             label = "Price",
-            data = listOf(20.0, 0.15, 50.33, 40.0, 100.500, ),
+            data = positiveDataList,
             lineColor = Color.Red,
             lineType = LineType.CURVED_LINE,
             lineShadow = true,
         )
     )
 
-    Box(Modifier) {
+    Box(Modifier.wrapContentWidth()) {
         LineChart(
             modifier = Modifier.fillMaxWidth(),
             linesParameters = testLineParameters,
             isGrid = false,
             gridColor = Color.Blue,
             xAxisData = listOf(
-                "2001",
-                "2010",
                 "2016",
+                "2018",
                 "2020",
+                "2022",
+                "2023",
                 "2024"
             ),
             animateChart = true,
@@ -337,7 +421,7 @@ fun CryptoChart() {
                 color = Color.Gray,
                 fontWeight = FontWeight.W400
             ),
-            yAxisRange = 45,
+            yAxisRange = 6,
             oneLineChart = false,
             gridOrientation = GridOrientation.VERTICAL
         )
