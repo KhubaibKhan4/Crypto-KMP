@@ -2,11 +2,13 @@ package org.company.app.presentation.ui.screens.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,23 +25,26 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import org.company.app.domain.model.crypto.Data
+import org.company.app.presentation.ui.components.CurrencyImage
 
 class DetailScreen(
     private val data: Data,
 ) : Screen {
     @Composable
     override fun Content() {
-        DetailContent()
+        DetailContent(data)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailContent() {
+fun DetailContent(data: Data) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -78,10 +83,25 @@ fun DetailContent() {
                 .windowInsetsPadding(WindowInsets.safeDrawing)
                 .padding(top = it.calculateTopPadding())
                 .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Content")
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CurrencyImage(
+                    id = data.id,
+                    modifier = Modifier.size(30.dp)
+                )
+                Text(
+                    text = data.name,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
 
     }
