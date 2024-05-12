@@ -80,6 +80,7 @@ kotlin {
             implementation("io.insert-koin:koin-annotations:1.3.1")
             implementation(libs.kamel.image)
             implementation("io.github.thechance101:chart:Beta-0.0.5")
+            implementation("com.ionspin.kotlin:bignum:0.3.9")
         }
 
         commonTest.dependencies {

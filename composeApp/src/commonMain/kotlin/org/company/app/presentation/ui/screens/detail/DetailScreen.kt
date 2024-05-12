@@ -56,6 +56,7 @@ import com.aay.compose.donutChart.model.PieChartData
 import com.aay.compose.lineChart.LineChart
 import com.aay.compose.lineChart.model.LineParameters
 import com.aay.compose.lineChart.model.LineType
+import com.ionspin.kotlin.bignum.decimal.toBigDecimal
 import org.company.app.domain.model.crypto.Data
 import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.theme.LocalThemeIsDark
@@ -325,12 +326,25 @@ fun MarketData(
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            MarketDataRow("MARKET CAP", data.quote.uSD.marketCap.toString(), isDark)
-            MarketDataRow("24H VOLUME", data.quote.uSD.volume24h.toString(), isDark)
-            MarketDataRow("RANK", data.cmcRank.toString(), isDark)
+            MarketDataRow("  MARKET CAP", formatMarketCap(data.quote.uSD.marketCap), isDark)
+            MarketDataRow("24H VOLUME", formatMarketCap(data.quote.uSD.volume24h), isDark)
+            MarketDataRow("RANK", "#${data.cmcRank}", isDark)
         }
     }
 }
+
+fun formatMarketCap(marketCap: Double): String {
+    val suffixes = listOf("", "K", "M", "B", "T")
+    var value = marketCap.toBigDecimal()
+    var index = 0
+
+    while (value >= 1000.toBigDecimal() && index < suffixes.size - 1) {
+        value /= 1000.toBigDecimal()
+        index++
+    }
+    return "${value.toPlainString().take(5)}${suffixes[index]}"
+}
+
 @Composable
 fun MarketDataRow(
     title: String,
@@ -349,7 +363,8 @@ fun MarketDataRow(
         Text(
             text = value,
             fontSize = 17.sp,
-            color = if (isDark) Color.White else Color.Black
+            color = if (isDark) Color.White else Color.Black,
+            fontWeight = FontWeight.Bold
         )
     }
 }
