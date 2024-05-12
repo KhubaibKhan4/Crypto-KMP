@@ -165,33 +165,47 @@ fun HomeContent(
                     shape = RoundedCornerShape(40.dp)
                 )
                 listingData?.data?.let { dataList ->
-                    if (dataList.isNotEmpty()) {
-                        val combinedFilteredList = mutableListOf<Data>()
-                        if (dataList.size > 0) {
-                            combinedFilteredList.add(dataList[0])
-                        }
-                        if (dataList.size > 12) {
-                            combinedFilteredList.add(dataList[12])
-                        }
+                    if (queryText.isEmpty()){
+                        if (dataList.isNotEmpty()) {
+                            val combinedFilteredList = mutableListOf<Data>()
+                            if (dataList.size > 0) {
+                                combinedFilteredList.add(dataList[0])
+                            }
+                            if (dataList.size > 12) {
+                                combinedFilteredList.add(dataList[12])
+                            }
 
-                        CryptoList(
-                            dataList = combinedFilteredList,
-                            coinsText = "Favourite",
-                            viewText = "Large Cap",
-                            largeCapColor = Color(0xFFc127d9),
-                            isCapIconEnabled = true
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        SuggestionMessage()
-                        Spacer(modifier = Modifier.height(8.dp))
-                        CryptoList(
-                            dataList = dataList,
-                            coinsText = "All Coins",
-                            viewText = "View All"
-                        )
-                    } else {
-                        Text(text = "No data available.")
+                            CryptoList(
+                                dataList = combinedFilteredList,
+                                coinsText = "Favourite",
+                                viewText = "Large Cap",
+                                largeCapColor = Color(0xFFc127d9),
+                                isCapIconEnabled = true
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            SuggestionMessage()
+                            Spacer(modifier = Modifier.height(8.dp))
+                            CryptoList(
+                                dataList = dataList,
+                                coinsText = "All Coins",
+                                viewText = "View All"
+                            )
+                        } else {
+                            Text(text = "No data available.")
+                        }
+                    }else{
+                        val filteredList = dataList.filter { it.name.contains(queryText, ignoreCase = true) }
+                        if (filteredList.isNotEmpty()) {
+                            CryptoList(
+                                dataList = filteredList,
+                                coinsText = "Search Results",
+                                viewText = "View All"
+                            )
+                        } else {
+                            Text(text = "No matching results.")
+                        }
                     }
+
                 }
             }
             PullRefreshIndicator(

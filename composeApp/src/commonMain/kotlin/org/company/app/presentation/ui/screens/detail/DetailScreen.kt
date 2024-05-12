@@ -232,8 +232,8 @@ fun DetailContent(data: Data) {
             Spacer(modifier = Modifier.height(16.dp))
             TabRow(
                 selectedTabIndex = capList.indexOf(selectedPeriod),
-                containerColor = Color.White,
-                contentColor = Color.Black,
+                containerColor = if (isDark) MaterialTheme.colorScheme.surface else Color.White,
+                contentColor = if (isDark) Color.White else Color.Black,
                 indicator = { tabPositions ->
                     TabRowDefaults.Indicator(
                         modifier = Modifier.tabIndicatorOffset(
