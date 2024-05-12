@@ -2,10 +2,13 @@ package org.company.app.presentation.ui.screens.detail
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,6 +16,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -38,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -46,6 +51,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import com.aay.compose.barChart.BarChart
+import com.aay.compose.barChart.model.BarParameters
+import com.aay.compose.baseComponents.model.GridOrientation
+import com.aay.compose.baseComponents.model.LegendPosition
+import com.aay.compose.lineChart.LineChart
+import com.aay.compose.lineChart.model.LineParameters
+import com.aay.compose.lineChart.model.LineType
 import org.company.app.domain.model.crypto.Data
 import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.theme.LocalThemeIsDark
@@ -245,31 +257,152 @@ fun DetailContent(data: Data) {
                     )
                 }
             }
-            when(selectedPeriod) {
-                "1H" -> {
-                    Text("1H Selected")
-                }
-                "1D" -> {
-                    Text("1D Selected")
-                }
-                "1W" -> {
-                    Text("1W Selected")
-                }
-                "1M" -> {
-                    Text("1M Selected")
-                }
-                "3M" -> {
-                    Text("3M Selected")
-                }
-                "6M" -> {
-                    Text("6M Selected")
-                }
-                "1Y" -> {
-                    Text("1Y Selected")
-                }
 
+            Column(
+                modifier = Modifier.fillMaxWidth()
+                    .fillMaxHeight(.40f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                when (selectedPeriod) {
+                    "1H" -> {
+                        CryptoChart()
+                    }
+
+                    "1D" -> {
+                        BarChartSample()
+                    }
+
+                    "1W" -> {
+                        BarChartSample()
+                    }
+
+                    "1M" -> {
+                        Text("1M Selected")
+                    }
+
+                    "3M" -> {
+                        Text("3M Selected")
+                    }
+
+                    "6M" -> {
+                        Text("6M Selected")
+                    }
+
+                    "1Y" -> {
+                        Text("1Y Selected")
+                    }
+
+                }
             }
         }
 
     }
+}
+
+@Composable
+fun CryptoChart() {
+    val testLineParameters: List<LineParameters> = listOf(
+        LineParameters(
+            label = "Price",
+            data = listOf(20.0, 0.15, 50.33, 40.0, 100.500, ),
+            lineColor = Color.Red,
+            lineType = LineType.CURVED_LINE,
+            lineShadow = true,
+        )
+    )
+
+    Box(Modifier) {
+        LineChart(
+            modifier = Modifier.fillMaxWidth(),
+            linesParameters = testLineParameters,
+            isGrid = false,
+            gridColor = Color.Blue,
+            xAxisData = listOf(
+                "2001",
+                "2010",
+                "2016",
+                "2020",
+                "2024"
+            ),
+            animateChart = true,
+            showGridWithSpacer = true,
+            legendPosition = LegendPosition.TOP,
+            yAxisStyle = TextStyle(
+                fontSize = 14.sp,
+                color = Color.Gray,
+            ),
+            xAxisStyle = TextStyle(
+                fontSize = 14.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.W400
+            ),
+            yAxisRange = 45,
+            oneLineChart = false,
+            gridOrientation = GridOrientation.VERTICAL
+        )
+    }
+}
+
+
+@Composable
+fun BarChartSample() {
+
+    val testBarParameters: List<BarParameters> = listOf(
+        BarParameters(
+            dataName = "Completed",
+            data = listOf(0.6, 10.6, 80.0, 50.6, 44.0, 100.6, 10.0),
+            barColor = Color(0xFF6C3428)
+        ),
+        BarParameters(
+            dataName = "Completed",
+            data = listOf(50.0, 30.6, 77.0, 69.6, 50.0, 30.6, 80.0),
+            barColor = Color(0xFFBA704F),
+        ),
+        BarParameters(
+            dataName = "Completed",
+            data = listOf(100.0, 99.6, 60.0, 80.6, 10.0, 100.6, 55.99),
+            barColor = Color(0xFFDFA878),
+        ),
+    )
+
+    Box(Modifier.fillMaxSize()) {
+        BarChart(
+            chartParameters = testBarParameters,
+            gridColor = Color.DarkGray,
+            xAxisData = listOf("2016", "2017", "2018", "2019", "2020", "2021", "2022"),
+            isShowGrid = true,
+            animateChart = true,
+            showGridWithSpacer = true,
+            yAxisStyle = TextStyle(
+                fontSize = 14.sp,
+                color = Color.DarkGray,
+            ),
+            xAxisStyle = TextStyle(
+                fontSize = 14.sp,
+                color = Color.DarkGray,
+                fontWeight = FontWeight.W400
+            ),
+            yAxisRange = 15,
+            barWidth = 20.dp
+        )
+    }
+}
+
+fun createDoubleList(
+    percentChange1h: Double,
+    percentChange24h: Double,
+    percentChange7d: Double,
+    percentChange30d: Double,
+    percentChange60d: Double,
+    percentChange1y: Double,
+): List<Double> {
+    return listOf(
+        percentChange1h,
+        percentChange24h,
+        percentChange7d,
+        percentChange30d,
+        percentChange60d,
+        percentChange1y
+    )
 }
