@@ -1,6 +1,7 @@
 package org.company.app.presentation.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,7 +24,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
 import org.company.app.domain.model.crypto.Data
+import org.company.app.presentation.ui.screens.detail.DetailScreen
 import org.company.app.theme.LocalThemeIsDark
 import kotlin.math.roundToInt
 
@@ -36,11 +39,15 @@ fun CryptoList(
     isCapIconEnabled: Boolean = false,
 ) {
     val isDark by LocalThemeIsDark.current
+    val navigator = LocalNavigator.current
     val viewALlColor =
         if (viewText.contains("View All")) if (isDark) Color.White else Color.Black else largeCapColor
     val textColor = if (isDark) Color.White else Color.Black
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
+            .clickable {
+                navigator?.push(DetailScreen())
+            },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
