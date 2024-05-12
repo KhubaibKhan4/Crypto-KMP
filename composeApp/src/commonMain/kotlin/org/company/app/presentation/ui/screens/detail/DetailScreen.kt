@@ -59,6 +59,7 @@ fun DetailContent(data: Data) {
     val percentChange24h = data.quote.uSD.percentChange24h
     val percentChange1h = data.quote.uSD.percentChange1h
     val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
+    val textColor1h = if (percentChange1h > 0) Color.Green else Color.Red
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -201,7 +202,7 @@ fun DetailContent(data: Data) {
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
                     text = "${percentChange1h.roundToInt()}%",
-                    color = textColor24h,
+                    color = textColor1h,
                     fontSize = 20.sp
                 )
             }
