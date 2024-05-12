@@ -1,5 +1,6 @@
 package org.company.app.presentation.ui.screens.detail
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +38,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
 import org.company.app.domain.model.crypto.Data
 import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.theme.LocalThemeIsDark
@@ -55,6 +57,7 @@ class DetailScreen(
 @Composable
 fun DetailContent(data: Data) {
     val isDark by LocalThemeIsDark.current
+    val navigator = LocalNavigator.current
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
     val percentChange1h = data.quote.uSD.percentChange1h
@@ -73,7 +76,10 @@ fun DetailContent(data: Data) {
                 navigationIcon = {
                     Icon(
                         imageVector = Icons.Outlined.ArrowBackIosNew,
-                        contentDescription = "Menu Icon"
+                        contentDescription = "Menu Icon",
+                        modifier = Modifier.clickable {
+                            navigator?gi.pop()
+                        }
                     )
                 },
                 actions = {
@@ -203,7 +209,7 @@ fun DetailContent(data: Data) {
                 Text(
                     text = "${percentChange1h.roundToInt()}%",
                     color = textColor1h,
-                    fontSize = 20.sp
+                    fontSize = 16.sp
                 )
             }
         }
