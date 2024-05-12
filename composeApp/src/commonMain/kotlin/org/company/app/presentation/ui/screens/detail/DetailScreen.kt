@@ -258,14 +258,6 @@ fun DetailContent(data: Data) {
                     )
                 }
             }
-            val listOfId = listOf(
-                data.quote.uSD.percentChange1h,
-                data.quote.uSD.percentChange24h,
-                data.quote.uSD.percentChange7d,
-                data.quote.uSD.percentChange30d,
-            )
-
-            val dataList = listOf(20.0, 44.15, 66.33, 35.0, 100.500)
             Column(
                 modifier = Modifier.fillMaxWidth()
                     .height(300.dp),
