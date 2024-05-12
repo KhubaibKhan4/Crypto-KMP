@@ -14,11 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.StarOutline
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -30,6 +33,7 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -289,8 +293,71 @@ fun DetailContent(data: Data) {
             }
             Spacer(modifier = Modifier.height(8.dp))
             MarketData(data, isDark)
+            Spacer(modifier = Modifier.height(24.dp))
+            BuyContent(data)
         }
 
+    }
+}
+
+@Composable
+fun BuyContent(
+    data: Data,
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+            .height(140.dp),
+        shape = RoundedCornerShape(
+            bottomStart = 12.dp, bottomEnd = 12.dp
+        )
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth()
+                .padding(12.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ) {
+                CurrencyImage(
+                    id = data.id,
+                    modifier = Modifier.size(30.dp)
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = data.name,
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    fontWeight = FontWeight.Bold,
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = "0 ${data.symbol}",
+                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            TextButton(
+                onClick = {
+
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF9234eb),
+                ),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    "Buy ${data.symbol}",
+                    fontSize = MaterialTheme.typography.titleMedium.fontSize
+                )
+            }
+        }
     }
 }
 
