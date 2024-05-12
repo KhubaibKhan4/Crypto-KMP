@@ -25,14 +25,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import org.company.app.domain.model.crypto.Data
 import org.company.app.presentation.ui.components.CurrencyImage
+import org.company.app.theme.LocalThemeIsDark
+import kotlin.math.roundToInt
 
 class DetailScreen(
     private val data: Data,
@@ -46,6 +54,10 @@ class DetailScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailContent(data: Data) {
+    val isDark by LocalThemeIsDark.current
+    val textColor = if (isDark) Color.White else Color.Black
+    val percentChange24h = data.quote.uSD.percentChange24h
+    val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -104,7 +116,51 @@ fun DetailContent(data: Data) {
                     fontWeight = FontWeight.Bold,
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val priceString = buildAnnotatedString {
+                   withStyle(
+                       SpanStyle(
+                           color = Color.Gray,
+                           fontSize = 20.sp,
+                           fontWeight = FontWeight.Bold
+                       )
+                   ){
+                       append("$ ")
+                   }
+                    withStyle(
+                        SpanStyle(
+                            color = textColor,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    ){
+                        append("$"+"${((data.quote.uSD.price * 100).roundToInt()) / 100.0}")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            color = Color.Gray,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    ){
+                        append(" USD")
+                    }
 
+                }
+                Text(
+                    text = priceString
+                )
+                Text(
+                    text = "${percentChange24h.roundToInt()}%",
+                    color = textColor24h
+                )
+            }
         }
 
     }
