@@ -57,6 +57,7 @@ fun DetailContent(data: Data) {
     val isDark by LocalThemeIsDark.current
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
+    val percentChange1h = data.quote.uSD.percentChange1h
     val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
     Scaffold(
         topBar = {
@@ -124,23 +125,23 @@ fun DetailContent(data: Data) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val priceString = buildAnnotatedString {
-                   withStyle(
-                       SpanStyle(
-                           color = Color.Gray,
-                           fontSize = 20.sp,
-                           fontWeight = FontWeight.Bold
-                       )
-                   ){
-                       append("$ ")
-                   }
+                    withStyle(
+                        SpanStyle(
+                            color = Color.Gray,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    ) {
+                        append("$ ")
+                    }
                     withStyle(
                         SpanStyle(
                             color = textColor,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold
                         )
-                    ){
-                        append("$"+"${((data.quote.uSD.price * 100).roundToInt()) / 100.0}")
+                    ) {
+                        append("$" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}")
                     }
                     withStyle(
                         SpanStyle(
@@ -148,7 +149,7 @@ fun DetailContent(data: Data) {
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
                         )
-                    ){
+                    ) {
                         append(" USD")
                     }
 
@@ -158,7 +159,50 @@ fun DetailContent(data: Data) {
                 )
                 Text(
                     text = "${percentChange24h.roundToInt()}%",
-                    color = textColor24h
+                    color = textColor24h,
+                    fontSize = 20.sp
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CurrencyImage(
+                    id = data.id,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                val latestCap = buildAnnotatedString {
+                    withStyle(
+                        SpanStyle(
+                            color = Color.Gray,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    ) {
+                        append("${data.quote.uSD.fullyDilutedMarketCap}")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            color = Color.Gray,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    ) {
+                        append(" ${data.symbol}")
+                    }
+
+                }
+                Text(
+                    text = latestCap
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = "${percentChange1h.roundToInt()}%",
+                    color = textColor24h,
+                    fontSize = 20.sp
                 )
             }
         }
