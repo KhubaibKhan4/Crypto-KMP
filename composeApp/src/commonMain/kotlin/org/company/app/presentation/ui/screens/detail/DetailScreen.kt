@@ -11,8 +11,9 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.WbSunny
+import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,8 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import org.company.app.domain.model.crypto.Data
 
-class DetailScreen : Screen {
+class DetailScreen(
+    private val data: Data,
+) : Screen {
     @Composable
     override fun Content() {
         DetailContent()
@@ -41,21 +45,25 @@ fun DetailContent() {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Track Coins",
+                        "",
                         textAlign = TextAlign.Center,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize
                     )
                 },
                 navigationIcon = {
                     Icon(
-                        imageVector = Icons.Outlined.WbSunny,
+                        imageVector = Icons.Outlined.ArrowBackIosNew,
                         contentDescription = "Menu Icon"
                     )
                 },
                 actions = {
                     Icon(
                         imageVector = Icons.Outlined.Notifications,
-                        contentDescription = "Menu Icon"
+                        contentDescription = "Notifications Icon"
+                    )
+                    Icon(
+                        imageVector = Icons.Outlined.StarOutline,
+                        contentDescription = "Favourite Icon"
                     )
                 },
                 modifier = Modifier.fillMaxWidth()

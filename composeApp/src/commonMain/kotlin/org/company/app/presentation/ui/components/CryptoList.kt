@@ -39,15 +39,11 @@ fun CryptoList(
     isCapIconEnabled: Boolean = false,
 ) {
     val isDark by LocalThemeIsDark.current
-    val navigator = LocalNavigator.current
     val viewALlColor =
         if (viewText.contains("View All")) if (isDark) Color.White else Color.Black else largeCapColor
     val textColor = if (isDark) Color.White else Color.Black
     Column(
-        modifier = Modifier.fillMaxWidth()
-            .clickable {
-                navigator?.push(DetailScreen())
-            },
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -97,6 +93,7 @@ fun CryptoList(
 
 @Composable
 fun CryptoItem(data: Data) {
+    val navigator = LocalNavigator.current
     val isDark by LocalThemeIsDark.current
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
@@ -104,7 +101,10 @@ fun CryptoItem(data: Data) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable {
+                navigator?.push(DetailScreen(data))
+            },
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ) {
