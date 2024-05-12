@@ -296,6 +296,7 @@ fun DetailContent(data: Data) {
 
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
             MarketData(data, isDark)
         }
 
@@ -317,6 +318,7 @@ fun MarketData(
             fontSize = MaterialTheme.typography.titleMedium.fontSize,
             fontWeight = FontWeight.Bold,
             color = if (isDark) Color.White else Color.Black,
+            modifier = Modifier.padding(start = 8.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         HorizontalDivider(color = Color.LightGray)
@@ -326,7 +328,7 @@ fun MarketData(
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            MarketDataRow("  MARKET CAP", formatMarketCap(data.quote.uSD.marketCap), isDark)
+            MarketDataRow("MARKET CAP", formatMarketCap(data.quote.uSD.marketCap), isDark)
             MarketDataRow("24H VOLUME", formatMarketCap(data.quote.uSD.volume24h), isDark)
             MarketDataRow("RANK", "#${data.cmcRank}", isDark)
         }
@@ -362,7 +364,7 @@ fun MarketDataRow(
         )
         Text(
             text = value,
-            fontSize = 17.sp,
+            fontSize = 22.sp,
             color = if (isDark) Color.White else Color.Black,
             fontWeight = FontWeight.Bold
         )
