@@ -75,6 +75,7 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.screen.size)
             implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.4"))
             implementation("io.insert-koin:koin-core")
             implementation("io.insert-koin:koin-compose")
