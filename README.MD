@@ -72,7 +72,11 @@ If you find my work helpful, you can support me by [![Buy me a coffee](https://i
 
 | ![Screenshot 1](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/1.png) | ![Screenshot 2](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/2.png) | ![Screenshot 3](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/3.png) |
 | --- | --- | --- |
-| ![Screenshot 4](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/4.png) | 
+| ![Screenshot 4](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/4.png) | ![Screenshot 5](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/5.png) |  ![Screenshot 6](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/6.png) |
+| --- | --- | --- |
+| ![Screenshot 7](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/7.png) | ![Screenshot 8](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/8.png) |  ![Screenshot 9](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/9.png) |
+| --- | --- | --- |
+| ![Screenshot 10](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/10.png) | ![Screenshot 11](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/11.png) |  ![Screenshot 12](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/12.png) |
 
 ## Desktop Screen Shots
 
@@ -81,6 +85,13 @@ If you find my work helpful, you can support me by [![Buy me a coffee](https://i
 | ![Screenshot 2](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/41.png) | 
 | ![Screenshot 3](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/42.png) |
 | ![Screenshot 4](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/43.png) |
+| ![Screenshot 5](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/44.png) |
+| ![Screenshot 6](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/45.png) |
+| ![Screenshot 7](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/46.png) |
+| ![Screenshot 5](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/47.png) |
+| ![Screenshot 6](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/48.png) |
+| ![Screenshot 7](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/49.png) |
+| ![Screenshot 8](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/50.png) |
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
