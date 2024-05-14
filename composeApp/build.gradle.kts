@@ -83,6 +83,11 @@ kotlin {
             implementation(libs.kamel.image)
             implementation("io.github.thechance101:chart:Beta-0.0.5")
             implementation("com.ionspin.kotlin:bignum:0.3.9")
+            implementation(libs.ktor.core)
+            implementation(libs.coil.compose.core)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.mp)
+            implementation(libs.coil.network.ktor)
         }
 
         commonTest.dependencies {
