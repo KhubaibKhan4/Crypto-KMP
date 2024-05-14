@@ -3,7 +3,6 @@ package org.company.app.presentation.ui.components
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,7 +17,7 @@ import io.kamel.image.asyncPainterResource
 fun ChartImage(
     id: Int,
     modifier: Modifier,
-    tintColor: Color
+    tintColor: Color,
 ) {
     val image: Resource<Painter> =
         asyncPainterResource("https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/$id.svg")

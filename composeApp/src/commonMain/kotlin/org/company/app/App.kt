@@ -46,6 +46,13 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.setSingletonImageLoaderFactory
+import coil3.request.CachePolicy
+import coil3.request.crossfade
+import coil3.util.DebugLogger
 import org.company.app.presentation.ui.navigate.rails.items.NavigationItem
 import org.company.app.presentation.ui.navigate.rails.navbar.NavigationSideBar
 import org.company.app.presentation.ui.navigate.tabs.analytics.AnalyticTab
@@ -55,10 +62,21 @@ import org.company.app.presentation.ui.navigate.tabs.profile.ProfileTab
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 internal fun App() = AppTheme {
+    setSingletonImageLoaderFactory { context ->
+        getAsyncImageLoader(context)
+    }
     AppContent()
 }
+
+fun getAsyncImageLoader(context: PlatformContext) =
+    ImageLoader.Builder(context)
+        .crossfade(true)
+        .logger(DebugLogger())
+        .memoryCachePolicy(CachePolicy.ENABLED)
+        .build()
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
