@@ -15,13 +15,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -96,10 +97,12 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
             )
         }
     ) {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = it.calculateTopPadding(), start = 4.dp, end = 4.dp),
+                .padding(top = it.calculateTopPadding(), start = 4.dp, end = 4.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
@@ -236,8 +239,7 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                         ChartImage(
                             id = data.id,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f),
+                                .fillMaxWidth(),
                             tintColor = textColor
                         )
                     }
