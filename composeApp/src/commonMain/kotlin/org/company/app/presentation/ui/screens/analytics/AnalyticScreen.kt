@@ -131,7 +131,7 @@ fun TopMoversContent(data: Data) {
     val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
     Card(
         modifier = Modifier.width(140.dp)
-            .height(74.dp),
+            .height(78.dp),
         shape = RoundedCornerShape(14.dp)
     ) {
         Column(
