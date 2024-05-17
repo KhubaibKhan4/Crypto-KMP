@@ -100,7 +100,64 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Top Movers",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Start
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                listingData?.data?.let { list ->
+                    items(list) { data ->
+                        TopMoversContent(data)
+                    }
+                }
+            }
         }
+    }
+}
+
+@Composable
+fun TopMoversContent(data: Data) {
+    val isDark by LocalThemeIsDark.current
+    val textColor = if (isDark) Color.White else Color.Black
+    val percentChange24h = data.quote.uSD.percentChange24h
+    val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
+    Card(
+        modifier = Modifier.width(140.dp)
+            .height(74.dp),
+        shape = RoundedCornerShape(14.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth()
+                .padding(4.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "${percentChange24h.roundToInt()}%",
+                color = textColor24h,
+                fontSize = 17.sp
+            )
+            Text(
+                text = "${data.symbol} " + "$" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold,
+                color = textColor
+            )
+        }
+        ChartImage(
+            id = data.id,
+            modifier = Modifier.width(55.dp)
+                .align(Alignment.End),
+            tintColor = textColor24h
+        )
     }
 }
 
