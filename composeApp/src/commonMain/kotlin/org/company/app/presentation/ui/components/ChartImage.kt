@@ -25,7 +25,7 @@ fun ChartImage(
         resource = image,
         contentDescription = null,
         modifier = modifier,
-        contentScale = ContentScale.FillBounds,
+        contentScale = ContentScale.FillWidth,
         animationSpec = tween(
             durationMillis = 300,
             delayMillis = 300,
