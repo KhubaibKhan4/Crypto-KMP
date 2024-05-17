@@ -14,9 +14,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -160,43 +163,59 @@ fun TopLosingContent(data: Data) {
 
     Card(
         modifier = Modifier
-            .width(140.dp)
-            .height(78.dp)
-            .shadow(4.dp, RoundedCornerShape(14.dp)),
-        shape = RoundedCornerShape(14.dp),
+            .width(160.dp)
+            .height(90.dp)
+            .shadow(4.dp, RoundedCornerShape(16.dp)),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (isDark) Color(0xFF1E1E1E) else Color(0xFFFFEBEE)
+            containerColor = if (isDark) Color(0xFF1A1A1A) else Color(0xFFFFCDD2)
         )
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
+                .fillMaxSize()
+                .padding(10.dp),
             horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = "${percentChange24h.roundToInt()}%",
-                color = textColor24h,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "${data.symbol} $" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = textColor
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowDownward,
+                    contentDescription = "Loss",
+                    tint = textColor24h,
+                    modifier = Modifier.size(24.dp)
+                )
+                Text(
+                    text = "${percentChange24h.roundToInt()}%",
+                    color = textColor24h,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = "${data.symbol} $" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = textColor
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = data.name,
+                    fontSize = 12.sp,
+                    color = textColor.copy(alpha = 0.7f)
+                )
+            }
         }
-        ChartImage(
-            id = data.id,
-            modifier = Modifier
-                .width(55.dp)
-                .align(Alignment.End),
-            tintColor = textColor24h
-        )
     }
 }
+
 
 @Composable
 fun TopMoversContent(data: Data) {
