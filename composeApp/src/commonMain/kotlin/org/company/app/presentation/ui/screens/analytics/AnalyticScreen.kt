@@ -186,7 +186,10 @@ fun CurrencyCard(data: Data) {
     Card(
         modifier = Modifier.width(300.dp)
             .height(175.dp),
-        shape = RoundedCornerShape(14.dp)
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isDark) Color(0xFF333333) else Color(0xFFF5F5F5)
+        )
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
