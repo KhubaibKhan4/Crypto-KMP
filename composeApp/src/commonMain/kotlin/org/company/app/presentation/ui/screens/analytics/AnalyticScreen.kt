@@ -1,7 +1,7 @@
 package org.company.app.presentation.ui.screens.analytics
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +23,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
 import org.company.app.domain.model.crypto.Data
 import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.usecase.ResultState
@@ -51,6 +53,7 @@ import org.company.app.presentation.ui.components.ChartImage
 import org.company.app.presentation.ui.components.CurrencyImage
 import org.company.app.presentation.ui.components.ErrorBox
 import org.company.app.presentation.ui.components.LoadingBox
+import org.company.app.presentation.ui.screens.detail.DetailScreen
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.theme.LocalThemeIsDark
 import org.koin.compose.koinInject
@@ -95,7 +98,7 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .padding(top = it.calculateTopPadding(), start = 4.dp, end = 4.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
@@ -152,6 +155,19 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                 }
             }
             Spacer(modifier = Modifier.height(14.dp))
+            Spacer(modifier = Modifier.height(4.dp))
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                listingData?.data?.let { list ->
+                    items(list) { data ->
+                        CurrencyCard(data)
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(14.dp))
             Text(
                 text = "Market Trends",
                 fontSize = 20.sp,
@@ -168,10 +184,11 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
             ) {
                 val randomCurrency = listingData?.data?.random()
                 randomCurrency?.let { data ->
-                    val textColor = if (data.quote.uSD.percentChange24h > 0) Color.Green else Color.Red
+                    val textColor =
+                        if (data.quote.uSD.percentChange24h > 0) Color.Green else Color.Red
 
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Top
                     ) {
@@ -210,7 +227,7 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                             )
                         }
                         Spacer(modifier = Modifier.height(8.dp))
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(1.dp)
@@ -238,13 +255,17 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
 }
 
 @Composable
-fun SummarySection(data: Data?) {
+fun SummarySection(data: Data) {
     val isDark by LocalThemeIsDark.current
+    val navigator = LocalNavigator.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .shadow(4.dp, RoundedCornerShape(16.dp)),
+            .shadow(4.dp, RoundedCornerShape(16.dp))
+            .clickable {
+                navigator?.push(DetailScreen(data))
+            },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (isDark) Color(0xFF1A1A1A) else Color(0xFFF0F0F0)
@@ -305,12 +326,16 @@ fun TopLosingContent(data: Data) {
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
     val textColor24h = Color.Red
+    val navigator = LocalNavigator.current
 
     Card(
         modifier = Modifier
             .width(160.dp)
             .height(90.dp)
-            .shadow(4.dp, RoundedCornerShape(16.dp)),
+            .shadow(4.dp, RoundedCornerShape(16.dp))
+            .clickable {
+                navigator?.push(DetailScreen(data))
+            },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (isDark) Color(0xFF1A1A1A) else Color(0xFFFFCDD2)
@@ -363,6 +388,7 @@ fun TopLosingContent(data: Data) {
 
 @Composable
 fun TopMoversContent(data: Data) {
+    val navigator = LocalNavigator.current
     val isDark by LocalThemeIsDark.current
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
@@ -372,7 +398,10 @@ fun TopMoversContent(data: Data) {
         modifier = Modifier
             .width(160.dp)
             .height(90.dp)
-            .shadow(4.dp, RoundedCornerShape(16.dp)),
+            .shadow(4.dp, RoundedCornerShape(16.dp))
+            .clickable {
+                navigator?.push(DetailScreen(data))
+            },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (isDark) Color(0xFF1A1A1A) else Color(0xFFE8F5E9)
