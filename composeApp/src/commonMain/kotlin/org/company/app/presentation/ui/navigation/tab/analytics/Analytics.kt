@@ -22,7 +22,7 @@ object Analytics : Tab {
         @Composable
         get() {
             val icon = rememberVectorPainter(Icons.Default.Analytics)
-            val title by remember { mutableStateOf("AnalyticScreen") }
+            val title by remember { mutableStateOf("Analytics") }
             val index: UShort = 1u
             return TabOptions(index, title, icon)
         }
