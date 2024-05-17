@@ -1,8 +1,8 @@
-package org.company.app.presentation.ui.tab.profile
+package org.company.app.presentation.ui.navigation.tab.analytics
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,18 +14,18 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import org.company.app.presentation.ui.screens.home.HomeScreen
 
-object Profile : Tab {
+object Analytics : Tab {
     @Composable
     override fun Content() {
-        Text("Profile")
+       Text("Analytics")
     }
 
     override val options: TabOptions
         @Composable
         get() {
-            val icon = rememberVectorPainter(Icons.Default.Person)
-            val title by remember { mutableStateOf("Profile") }
-            val index: UShort = 3u
+            val icon = rememberVectorPainter(Icons.Default.Analytics)
+            val title by remember { mutableStateOf("Analytics") }
+            val index: UShort = 1u
             return TabOptions(index, title, icon)
         }
 }
