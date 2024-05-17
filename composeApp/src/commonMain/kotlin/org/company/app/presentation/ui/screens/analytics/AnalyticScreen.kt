@@ -113,7 +113,10 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                listingData?.data?.let { list ->
+                val filteredData = listingData?.data
+                    ?.filter { it.quote.uSD.percentChange24h >= 0 }
+                    ?.sortedByDescending { it.quote.uSD.percentChange24h }
+                filteredData?.let { list ->
                     items(list) { data ->
                         TopMoversContent(data)
                     }
