@@ -126,7 +126,75 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Top Losing Currencies",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Start
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val losingData = listingData?.data
+                    ?.filter { it.quote.uSD.percentChange24h < 0 }
+                    ?.sortedBy { it.quote.uSD.percentChange24h }
+                losingData?.let { list ->
+                    items(list) { data ->
+                        TopLosingContent(data)
+                    }
+                }
+            }
         }
+    }
+}
+@Composable
+fun TopLosingContent(data: Data) {
+    val isDark by LocalThemeIsDark.current
+    val textColor = if (isDark) Color.White else Color.Black
+    val percentChange24h = data.quote.uSD.percentChange24h
+    val textColor24h = Color.Red
+
+    Card(
+        modifier = Modifier
+            .width(140.dp)
+            .height(78.dp)
+            .shadow(4.dp, RoundedCornerShape(14.dp)),
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isDark) Color(0xFF1E1E1E) else Color(0xFFFFEBEE)
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "${percentChange24h.roundToInt()}%",
+                color = textColor24h,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "${data.symbol} $" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                color = textColor
+            )
+        }
+        ChartImage(
+            id = data.id,
+            modifier = Modifier
+                .width(55.dp)
+                .align(Alignment.End),
+            tintColor = textColor24h
+        )
     }
 }
 
