@@ -1,5 +1,6 @@
 package org.company.app.presentation.ui.screens.analytics
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -28,6 +30,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -132,32 +136,41 @@ fun TopMoversContent(data: Data) {
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
     val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
+
     Card(
-        modifier = Modifier.width(140.dp)
-            .height(78.dp),
-        shape = RoundedCornerShape(14.dp)
+        modifier = Modifier
+            .width(140.dp)
+            .height(78.dp)
+            .shadow(4.dp, RoundedCornerShape(14.dp)),
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isDark) Color(0xFF333333) else Color(0xFFF5F5F5)
+        )
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
-                .padding(4.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
             Text(
                 text = "${percentChange24h.roundToInt()}%",
                 color = textColor24h,
-                fontSize = 17.sp
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
             )
             Text(
-                text = "${data.symbol} " + "$" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
-                fontSize = 13.sp,
+                text = "${data.symbol} $" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = textColor
             )
         }
         ChartImage(
             id = data.id,
-            modifier = Modifier.width(55.dp)
+            modifier = Modifier
+                .width(55.dp)
                 .align(Alignment.End),
             tintColor = textColor24h
         )
