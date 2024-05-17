@@ -90,7 +90,7 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
         Column(
             modifier = Modifier.fillMaxWidth()
                 .padding(top = it.calculateTopPadding(), start = 4.dp, end = 4.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
             LazyRow(
@@ -104,7 +104,7 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(14.dp))
             Text(
                 text = "Top Movers",
                 fontSize = 20.sp,
@@ -126,7 +126,7 @@ fun AnalyticsContent(viewModel: MainViewModel = koinInject()) {
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(14.dp))
             Text(
                 text = "Top Losing Currencies",
                 fontSize = 20.sp,
