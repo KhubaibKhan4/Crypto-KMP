@@ -457,13 +457,17 @@ fun TopMoversContent(data: Data) {
 @Composable
 fun CurrencyCard(data: Data) {
     val isDark by LocalThemeIsDark.current
+    val navigator = LocalNavigator.current
     val textColor = if (isDark) Color.White else Color.Black
     val percentChange24h = data.quote.uSD.percentChange24h
     val textColor24h = if (percentChange24h > 0) Color.Green else Color.Red
     Card(
         modifier = Modifier
             .width(300.dp)
-            .height(175.dp),
+            .height(175.dp)
+            .clickable {
+                navigator?.push(DetailScreen(data))
+            },
         shape = RoundedCornerShape(14.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (isDark) Color(0xFF333333) else Color(0xFFF5F5F5)
