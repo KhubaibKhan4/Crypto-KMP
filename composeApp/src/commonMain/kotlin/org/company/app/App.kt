@@ -16,14 +16,20 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocalLibrary
 import androidx.compose.material.icons.filled.MusicVideo
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Subscriptions
+import androidx.compose.material.icons.filled.Wallet
+import androidx.compose.material.icons.outlined.Analytics
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.LocalLibrary
 import androidx.compose.material.icons.outlined.MusicVideo
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Subscriptions
+import androidx.compose.material.icons.outlined.Wallet
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -89,21 +95,21 @@ fun AppContent() {
             hasNews = false,
         ),
         NavigationItem(
-            title = "Shorts",
-            selectedIcon = Icons.Filled.MusicVideo,
-            unselectedIcon = Icons.Outlined.MusicVideo,
+            title = "Analytics",
+            selectedIcon = Icons.Filled.Analytics,
+            unselectedIcon = Icons.Outlined.Analytics,
             hasNews = true,
         ),
         NavigationItem(
-            title = "Subscriptions",
-            selectedIcon = Icons.Filled.Subscriptions,
-            unselectedIcon = Icons.Outlined.Subscriptions,
+            title = "Wallet",
+            selectedIcon = Icons.Filled.Wallet,
+            unselectedIcon = Icons.Outlined.Wallet,
             hasNews = false,
         ),
         NavigationItem(
-            title = "Library",
-            selectedIcon = Icons.Filled.LocalLibrary,
-            unselectedIcon = Icons.Outlined.LocalLibrary,
+            title = "Profile",
+            selectedIcon = Icons.Filled.Person,
+            unselectedIcon = Icons.Outlined.Person,
             hasNews = false,
         ),
     )
