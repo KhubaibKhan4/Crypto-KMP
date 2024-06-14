@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -123,7 +124,7 @@ fun AppContent() {
         Scaffold(bottomBar = {
             if (!showNavigationRail) {
                 BottomNavigation(
-                    modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.ime),
+                    modifier = Modifier.fillMaxWidth().navigationBarsPadding(),
                     backgroundColor = MaterialTheme.colorScheme.background,
                     contentColor = contentColorFor(Color.Red),
                     elevation = 8.dp
