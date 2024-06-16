@@ -10,12 +10,12 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import org.company.app.presentation.ui.screens.wallet.WalletScreen
+import org.company.app.presentation.ui.screens.news.NewsScreen
 
 object News : Tab {
     @Composable
     override fun Content() {
-        Navigator(WalletScreen())
+        Navigator(NewsScreen())
     }
 
     override val options: TabOptions
