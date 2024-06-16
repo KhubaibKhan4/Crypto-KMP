@@ -1,6 +1,7 @@
 package org.company.app.presentation.ui.screens.news
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
 import io.kamel.core.Resource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -35,6 +37,7 @@ import org.company.app.domain.model.news.NewsList
 import org.company.app.domain.usecase.ResultState
 import org.company.app.presentation.ui.components.ErrorBox
 import org.company.app.presentation.ui.components.LoadingBox
+import org.company.app.presentation.ui.components.NewsDetailScreen
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.koin.compose.koinInject
 
@@ -49,7 +52,7 @@ class NewsScreen : Screen {
 fun NewsContent(
     viewModel: MainViewModel = koinInject(),
 ) {
-    var newsList by remember { mutableStateOf(emptyList<NewsList>()) }
+    var newsList by remember { mutableStateOf<NewsList?>(null) }
 
     LaunchedEffect(Unit) {
         viewModel.getAllNews()
@@ -71,21 +74,27 @@ fun NewsContent(
     }
 
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(200.dp)
+        columns = GridCells.Adaptive(300.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(newsList) { news ->
-
+        newsList?.data?.let {listData->
+            items(listData){
+                NewsItemView(it)
+            }
         }
+
     }
 }
 
 @Composable
-fun NewsItemView(news: Data, onNewsClick: (Data) -> Unit) {
+fun NewsItemView(news: Data) {
+    val navigator = LocalNavigator.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { onNewsClick(news) },
+            .clickable {navigator?.push(NewsDetailScreen(news)) },
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {

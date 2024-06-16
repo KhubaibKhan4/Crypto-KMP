@@ -5,5 +5,5 @@ import org.company.app.domain.model.news.NewsList
 
 interface CryptoApi {
     suspend fun getLatestListing(): LatestListing
-    suspend fun getAllNews(): List<NewsList>
+    suspend fun getAllNews(): NewsList
 }

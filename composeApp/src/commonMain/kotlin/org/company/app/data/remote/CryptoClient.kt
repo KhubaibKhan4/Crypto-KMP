@@ -51,7 +51,7 @@ object CryptoClient {
     suspend fun getLatestListing(): LatestListing {
         return client.get(BASE_URL + "cryptocurrency/listings/latest").body()
     }
-    suspend fun getAllNews(): List<NewsList>{
+    suspend fun getAllNews(): NewsList{
         return client.get(CRYPTO_URL + "v2/news/?lang=EN").body()
     }
 }

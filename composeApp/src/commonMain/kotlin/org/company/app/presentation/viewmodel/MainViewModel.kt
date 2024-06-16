@@ -15,8 +15,8 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     private val _latestListing = MutableStateFlow<ResultState<LatestListing>>(ResultState.LOADING)
     var latestListing: StateFlow<ResultState<LatestListing>> = _latestListing.asStateFlow()
 
-    private val _allNews = MutableStateFlow<ResultState<List<NewsList>>>(ResultState.LOADING)
-    var allNews: StateFlow<ResultState<List<NewsList>>> = _allNews.asStateFlow()
+    private val _allNews = MutableStateFlow<ResultState<NewsList>>(ResultState.LOADING)
+    var allNews: StateFlow<ResultState<NewsList>> = _allNews.asStateFlow()
 
 
     fun getLatestListing() {

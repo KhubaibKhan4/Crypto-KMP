@@ -10,7 +10,7 @@ class Repository: CryptoApi {
         return CryptoClient.getLatestListing()
     }
 
-    override suspend fun getAllNews(): List<NewsList> {
+    override suspend fun getAllNews(): NewsList {
         return CryptoClient.getAllNews()
     }
 }
