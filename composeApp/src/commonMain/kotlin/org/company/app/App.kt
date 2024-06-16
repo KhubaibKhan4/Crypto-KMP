@@ -19,19 +19,13 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.LocalLibrary
-import androidx.compose.material.icons.filled.MusicVideo
 import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Subscriptions
 import androidx.compose.material.icons.filled.Wallet
 import androidx.compose.material.icons.outlined.Analytics
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.LocalLibrary
-import androidx.compose.material.icons.outlined.MusicVideo
 import androidx.compose.material.icons.outlined.Newspaper
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Subscriptions
 import androidx.compose.material.icons.outlined.Wallet
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -66,8 +60,8 @@ import org.company.app.presentation.ui.navigation.rails.items.NavigationItem
 import org.company.app.presentation.ui.navigation.rails.navbar.NavigationSideBar
 import org.company.app.presentation.ui.navigation.tab.analytics.Analytics
 import org.company.app.presentation.ui.navigation.tab.home.Home
+import org.company.app.presentation.ui.navigation.tab.news.News
 import org.company.app.presentation.ui.navigation.tab.profile.Profile
-import org.company.app.presentation.ui.navigation.tab.wallet.Wallet
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
 
@@ -126,14 +120,14 @@ fun AppContent() {
         Scaffold(bottomBar = {
             if (!showNavigationRail) {
                 BottomNavigation(
-                    modifier = Modifier.fillMaxWidth().navigationBarsPadding(),
+                    modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.ime),
                     backgroundColor = MaterialTheme.colorScheme.background,
                     contentColor = contentColorFor(Color.Red),
                     elevation = 8.dp
                 ) {
                     TabItem(Home)
                     TabItem(Analytics)
-                    TabItem(Wallet)
+                    TabItem(News)
                     TabItem(Profile)
                 }
             }
@@ -182,7 +176,7 @@ fun AppContent() {
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.background)
                     ) {
-                        TabNavigator(Wallet)
+                        TabNavigator(News)
                     }
                 }
 
