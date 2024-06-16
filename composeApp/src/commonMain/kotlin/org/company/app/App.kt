@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocalLibrary
 import androidx.compose.material.icons.filled.MusicVideo
+import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Subscriptions
 import androidx.compose.material.icons.filled.Wallet
@@ -27,6 +28,7 @@ import androidx.compose.material.icons.outlined.Analytics
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.LocalLibrary
 import androidx.compose.material.icons.outlined.MusicVideo
+import androidx.compose.material.icons.outlined.Newspaper
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Subscriptions
 import androidx.compose.material.icons.outlined.Wallet
@@ -101,9 +103,9 @@ fun AppContent() {
             hasNews = true,
         ),
         NavigationItem(
-            title = "Wallet",
-            selectedIcon = Icons.Filled.Wallet,
-            unselectedIcon = Icons.Outlined.Wallet,
+            title = "News",
+            selectedIcon = Icons.Filled.Newspaper,
+            unselectedIcon = Icons.Outlined.Newspaper,
             hasNews = false,
         ),
         NavigationItem(
