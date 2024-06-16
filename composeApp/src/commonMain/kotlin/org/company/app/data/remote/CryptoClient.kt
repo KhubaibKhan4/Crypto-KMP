@@ -13,8 +13,10 @@ import io.ktor.client.request.headers
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.company.app.domain.model.crypto.LatestListing
+import org.company.app.domain.model.news.NewsList
 import org.company.app.utils.Constant.API_KEY
 import org.company.app.utils.Constant.BASE_URL
+import org.company.app.utils.Constant.CRYPTO_URL
 import org.company.app.utils.Constant.TIME_OUT
 
 object CryptoClient {
@@ -48,5 +50,8 @@ object CryptoClient {
     }
     suspend fun getLatestListing(): LatestListing {
         return client.get(BASE_URL + "cryptocurrency/listings/latest").body()
+    }
+    suspend fun getAllNews(): List<NewsList>{
+        return client.get(CRYPTO_URL + "v2/news/?lang=EN").body()
     }
 }
