@@ -1,6 +1,9 @@
 [versions]
 
+bignum = "0.3.9"
+chart = "Beta-0.0.5"
 kamelImage = "0.9.5"
+koinAnnotations = "1.3.1"
 kotlin = "2.0.0"
 compose = "1.6.11"
 agp = "8.2.2"
@@ -25,7 +28,14 @@ coil3 = "3.0.0-alpha06"
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
 androidx-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
+bignum = { module = "com.ionspin.kotlin:bignum", version.ref = "bignum" }
+chart = { module = "io.github.thechance101:chart", version.ref = "chart" }
+insert-koin-koin-core = { module = "io.insert-koin:koin-core" }
+io-insert-koin-koin-core = { module = "io.insert-koin:koin-core" }
 kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinAnnotations" }
+koin-compose = { module = "io.insert-koin:koin-compose" }
 lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
