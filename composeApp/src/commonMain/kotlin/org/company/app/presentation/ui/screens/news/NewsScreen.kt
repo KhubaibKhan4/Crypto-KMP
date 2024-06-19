@@ -158,7 +158,6 @@ fun QuickFilters(
         viewModel.getNewsCategories()
     }
     val newsCategories by viewModel.newsCategories.collectAsState()
-    val filters = listOf("All", "Altcoins", "Bitcoin", "Ethereum", "News")
 
     when(newsCategories){
         is ResultState.ERROR -> {
