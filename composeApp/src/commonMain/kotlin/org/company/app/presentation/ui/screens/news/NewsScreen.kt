@@ -64,6 +64,7 @@ import org.company.app.domain.usecase.ResultState
 import org.company.app.presentation.ui.components.ErrorBox
 import org.company.app.presentation.ui.components.LoadingBox
 import org.company.app.presentation.ui.components.NewsDetailScreen
+import org.company.app.presentation.ui.components.PromotionCardWithPager
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.utils.formatTimestamp
 import org.koin.compose.koinInject
@@ -124,13 +125,6 @@ fun NewsContent(
 @Composable
 fun HeaderSection(newsList: List<Data>?, modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(horizontal = 16.dp)) {
-        Text(
-            text = "Welcome to Crypto News",
-            style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         if (!newsList.isNullOrEmpty()) {
@@ -138,26 +132,11 @@ fun HeaderSection(newsList: List<Data>?, modifier: Modifier = Modifier) {
             val shuffledNewsList = remember { newsList.shuffled() }
 
             if (itemsToDisplay > 0) {
-                val pagerState = rememberPagerState(
-                    initialPage = 0,
-                    initialPageOffsetFraction = 0f,
-                    pageCount = { itemsToDisplay }
-                )
-
                 Box(modifier = Modifier.fillMaxWidth()) {
-                    Carousel(shuffledNewsList, pagerState)
-                    HorizontalPagerIndicator(
-                        pagerState = pagerState,
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .padding(vertical = 8.dp),
-                        activeColor = MaterialTheme.colorScheme.primary,
-                        inactiveColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
-                    )
+                    PromotionCardWithPager(shuffledNewsList)
                 }
             }
         } else {
-            // Handle case where newsList is null or empty
             Text(
                 text = "No news available",
                 style = MaterialTheme.typography.bodyMedium,
