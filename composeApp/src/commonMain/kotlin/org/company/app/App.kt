@@ -29,6 +29,9 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Wallet
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
@@ -119,11 +122,11 @@ fun AppContent() {
     TabNavigator(Home) { tabNavigator ->
         Scaffold(bottomBar = {
             if (!showNavigationRail) {
-                BottomNavigation(
+                NavigationBar(
                     modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.ime),
-                    backgroundColor = MaterialTheme.colorScheme.background,
+                    containerColor = MaterialTheme.colorScheme.background,
                     contentColor = contentColorFor(Color.Red),
-                    elevation = 8.dp
+                    tonalElevation = 8.dp
                 ) {
                     TabItem(Home)
                     TabItem(Analytics)
@@ -199,8 +202,8 @@ fun AppContent() {
 fun RowScope.TabItem(tab: Tab) {
     val isDark by LocalThemeIsDark.current
     val tabNavigator = LocalTabNavigator.current
-    BottomNavigationItem(
-        modifier = Modifier.background(MaterialTheme.colorScheme.surface)
+    NavigationBarItem(
+        modifier = Modifier
             .height(58.dp).clip(RoundedCornerShape(16.dp)),
         selected = tabNavigator.current == tab,
         onClick = {
@@ -227,8 +230,15 @@ fun RowScope.TabItem(tab: Tab) {
         enabled = true,
         alwaysShowLabel = true,
         interactionSource = MutableInteractionSource(),
-        selectedContentColor = Color.Red,
-        unselectedContentColor = Color.Black
+        colors = NavigationBarItemColors(
+            selectedTextColor = Color.Red,
+            unselectedIconColor = Color.Black,
+            selectedIconColor = Color.Red,
+            unselectedTextColor = Color.Black,
+            selectedIndicatorColor = Color.LightGray,
+            disabledIconColor = Color.Transparent,
+            disabledTextColor = Color.Transparent
+        )
     )
 }
 
