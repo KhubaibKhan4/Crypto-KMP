@@ -12,6 +12,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.company.app.domain.model.categories.NewsCategoriesItem
 import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.model.news.NewsList
 import org.company.app.utils.Constant.API_KEY
@@ -53,5 +54,9 @@ object CryptoClient {
     }
     suspend fun getAllNews(): NewsList{
         return client.get(CRYPTO_URL + "v2/news/?lang=EN").body()
+    }
+    suspend fun getNewsCategories(): List<NewsCategoriesItem>{
+        return client.get(CRYPTO_URL + "data/news/categories").body()
+
     }
 }
