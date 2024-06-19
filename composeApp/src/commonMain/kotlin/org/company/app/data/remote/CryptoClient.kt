@@ -56,7 +56,7 @@ object CryptoClient {
         return client.get(CRYPTO_URL + "v2/news/?lang=EN").body()
     }
     suspend fun getNewsCategories(): List<NewsCategoriesItem>{
-        return client.get(CRYPTO_URL + "data/news/categories").body()
+        return client.get( CRYPTO_URL+"news/categories").body()
 
     }
 }

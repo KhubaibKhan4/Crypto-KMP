@@ -151,17 +151,36 @@ fun HeaderSection(newsList: List<Data>?, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun QuickFilters() {
+fun QuickFilters(
+    viewModel: MainViewModel = koinInject()
+) {
+    LaunchedEffect(Unit){
+        viewModel.getNewsCategories()
+    }
+    val newsCategories by viewModel.newsCategories.collectAsState()
     val filters = listOf("All", "Altcoins", "Bitcoin", "Ethereum", "News")
 
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-    ) {
-        items(filters) { filter ->
-            Chip(text = filter)
+    when(newsCategories){
+        is ResultState.ERROR -> {
+            val error = (newsCategories as ResultState.ERROR).message
+            ErrorBox(error)
+        }
+        ResultState.LOADING -> {
+            LoadingBox()
+        }
+        is ResultState.SUCCESS -> {
+            val response = (newsCategories as ResultState.SUCCESS).response
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                items(response) { filter ->
+                    Chip(text = filter.categoryName)
+                }
+            }
         }
     }
+
 }
 
 
