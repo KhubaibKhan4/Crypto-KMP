@@ -6,16 +6,18 @@ import org.company.app.domain.model.categories.NewsCategoriesItem
 import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.model.news.NewsList
 
-class Repository: CryptoApi {
+class Repository(
+    private val cryptoClient: CryptoClient
+): CryptoApi {
     override suspend fun getLatestListing(): LatestListing {
-        return CryptoClient.getLatestListing()
+        return cryptoClient.getLatestListing()
     }
 
     override suspend fun getAllNews(): NewsList {
-        return CryptoClient.getAllNews()
+        return cryptoClient.getAllNews()
     }
 
     override suspend fun getNewsCategories(): List<NewsCategoriesItem> {
-        return CryptoClient.getNewsCategories()
+        return cryptoClient.getNewsCategories()
     }
 }

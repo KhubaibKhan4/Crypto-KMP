@@ -20,35 +20,7 @@ import org.company.app.utils.Constant.BASE_URL
 import org.company.app.utils.Constant.CRYPTO_URL
 import org.company.app.utils.Constant.TIME_OUT
 
-object CryptoClient {
-    private val client = HttpClient {
-        install(ContentNegotiation) {
-            json(
-                json = Json {
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                }
-            )
-        }
-        install(Logging) {
-            level = LogLevel.ALL
-            logger = object : Logger {
-                override fun log(message: String) {
-                    println(message)
-                }
-            }
-        }
-        install(HttpTimeout) {
-            requestTimeoutMillis = TIME_OUT
-            connectTimeoutMillis = TIME_OUT
-            socketTimeoutMillis = TIME_OUT
-        }
-        defaultRequest {
-            headers {
-                append("X-CMC_PRO_API_KEY", API_KEY)
-            }
-        }
-    }
+class CryptoClient(private val client: HttpClient) {
     suspend fun getLatestListing(): LatestListing {
         return client.get(BASE_URL + "cryptocurrency/listings/latest").body()
     }
