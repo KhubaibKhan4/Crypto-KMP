@@ -35,6 +35,7 @@ val appModule = module {
                         println(message)
                     }
                 }
+                filter { filter-> filter.url.host.contains("coinmarketcap.com") }
             }
             install(HttpTimeout) {
                 requestTimeoutMillis = Constant.TIME_OUT
