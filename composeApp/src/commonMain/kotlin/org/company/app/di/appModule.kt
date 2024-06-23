@@ -8,6 +8,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.headers
+import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.company.app.data.remote.CryptoClient
@@ -36,6 +37,7 @@ val appModule = module {
                     }
                 }
                 filter { filter-> filter.url.host.contains("coinmarketcap.com") }
+                sanitizeHeader { header-> header == HttpHeaders.Authorization }
             }
             install(HttpTimeout) {
                 requestTimeoutMillis = Constant.TIME_OUT
