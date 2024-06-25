@@ -25,9 +25,9 @@ If you find my work helpful, you can support me by [![Buy me a coffee](https://i
 
 # Tech Stack Highlights
 
-- **Kotlin Multiplatform**: `1.9.23`
+- **Kotlin Multiplatform**: `2.0.0`
 - **AGP (Android Gradle Plugin)**: `8.2.2`
-- **Compose**: `1.6.2`
+- **Compose**: `1.6.11`
   - `androidx-appcompat`: `1.6.1`
   - `androidx-activityCompose`: `1.9.0`
   - `compose-uitooling`: `1.6.7`
