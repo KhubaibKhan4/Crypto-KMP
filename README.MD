@@ -40,7 +40,7 @@ If you find my work helpful, you can support me by [![Buy me a coffee](https://i
   - `kotlinx-datetime`: `0.5.0`
 - **Networking**:
   - `coilNetwork`: `3.0.0-alpha01`
-  - `ktor`: `2.3.10`
+  - `ktor`: `2.3.12`
 - **Dependency Injection**:
   - `koin`: `3.5.4`
 - **UI/UX**:
@@ -60,7 +60,7 @@ If you find my work helpful, you can support me by [![Buy me a coffee](https://i
   - `size`: `0.3.1`
 - **Voyager Navigation**: `1.0.0`
 - **Other Utilities**:
-  - `officia-viewModel`: `2.8.0-beta02`
+  - `official-viewModel`: `2.8.0-beta02`
 
 ## Screen Shots
 
