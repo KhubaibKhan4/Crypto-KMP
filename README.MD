@@ -35,7 +35,7 @@ If you find my work helpful, you can support me by [![Buy me a coffee](https://i
   - `composeIcons`: `1.1.0`
 - **Core Libraries**: `12.1.0`
 - **Kotlinx Libraries**:
-  - `kotlinx-coroutines`: `1.8.0`
+  - `kotlinx-coroutines`: `1.9.0-RC`
   - `kotlinx-serialization`: `1.6.3`
   - `kotlinx-datetime`: `0.5.0`
 - **Networking**:
