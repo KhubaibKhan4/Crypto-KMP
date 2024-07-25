@@ -61,7 +61,7 @@ Let's chat about potential projects, job opportunities, or any other collaborati
   - `size`: `0.3.1`
 - **Voyager Navigation**: `1.1.0-Beta`
 - **Other Utilities**:
-  - `official-viewModel`: `2.8.0-beta02`
+  - `official-viewModel`: `2.8.0`
 
 ## Screen Shots
 
