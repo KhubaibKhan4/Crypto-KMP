@@ -6,6 +6,7 @@ Crypto-KMP is a Kotlin Multiplatform (KMP) project aimed at providing cryptocurr
 
 ## 🚀 Future Plans
 - TV and Wear OS Versions
+- Real-time Tracking 
 
 ## 🌟 Contributions
 If you wanna contribute, Please make sure to add new features & Then make a PR.Feel free to contribute to the project and stay tuned for more exciting updates!
