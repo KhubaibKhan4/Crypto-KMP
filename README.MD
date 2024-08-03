@@ -44,7 +44,7 @@ Let's chat about potential projects, job opportunities, or any other collaborati
   - `coilNetwork`: `3.0.0-alpha01`
   - `ktor`: `2.3.12`
 - **Dependency Injection**:
-  - `koin`: `3.5.4`
+  - `koin`: `3.6.0-Beta4`
 - **UI/UX**:
   - `compose-uitooling`: `1.6.3`
   - `composeIcons`: `1.1.0`
