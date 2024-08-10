@@ -125,3 +125,15 @@ Run iOS simulator UI tests: `./gradlew :composeApp:iosSimulatorArm64Test`
 Run the browser application: `./gradlew :composeApp:jsBrowserDevelopmentRun --continue`
 Run browser UI tests: `./gradlew :composeApp:jsBrowserTest`
 
+## Community Resources
+Join our community to connect with other users and contributors:
+
+- **Documentation**: Find more information and resources in our [documentation](https://github.com/KhubaibKhan4/Youtube-Clone-KMP/wiki).
+- **Forums**: Ask questions and discuss ideas in our [community forums](https://github.com/KhubaibKhan4/Youtube-Clone-KMP/discussions).
+- **Chat**: Join our community chat on [Slack](https://join.slack.com/t/kotlinmultipl-gr51340/shared_invite/zt-2go24sz06-_lyxM2arRifMqwAPN2EzoA) to chat with other users and contributors.
+
+## Acknowledgments
+We'd like to thank the following individuals and organizations for their contributions to the YouTube Clone project:
+
+- No Contributor Yet.
+- Checkout Other cool projects on my profile as well.
