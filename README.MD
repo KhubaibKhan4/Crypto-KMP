@@ -1,5 +1,5 @@
 # Crypto KMP
-![Crypto KMP](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/poster.png)
+![Crypto KMP](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/poster_crypto.png)
 
 ## Overview
 Crypto-KMP is a Kotlin Multiplatform (KMP) project aimed at providing cryptocurrency-related functionalities across Android, iOS, Web, and Desktop platforms with shared code. This documentation provides an overview of the project structure, features, and usage instructions.
