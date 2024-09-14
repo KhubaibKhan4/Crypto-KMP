@@ -9,9 +9,6 @@ import org.koin.core.context.startKoin
 fun main() {
     onWasmReady {
         CanvasBasedWindow("Crypto-KMP") {
-            startKoin {
-                modules(appModule)
-            }
             App()
         }
     }

@@ -59,6 +59,7 @@ import coil3.compose.setSingletonImageLoaderFactory
 import coil3.request.CachePolicy
 import coil3.request.crossfade
 import coil3.util.DebugLogger
+import org.company.app.di.appModule
 import org.company.app.presentation.ui.navigation.rails.items.NavigationItem
 import org.company.app.presentation.ui.navigation.rails.navbar.NavigationSideBar
 import org.company.app.presentation.ui.navigation.tab.analytics.Analytics
@@ -67,6 +68,8 @@ import org.company.app.presentation.ui.navigation.tab.news.News
 import org.company.app.presentation.ui.navigation.tab.profile.Profile
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
+import org.koin.compose.KoinApplication
+import org.koin.core.KoinApplication
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
@@ -74,7 +77,13 @@ internal fun App() = AppTheme {
     setSingletonImageLoaderFactory { context ->
         getAsyncImageLoader(context)
     }
-    AppContent()
+    KoinApplication(
+        application = {
+            modules(appModule)
+        }
+    ){
+        AppContent()
+    }
 }
 
 fun getAsyncImageLoader(context: PlatformContext) =
