@@ -64,7 +64,7 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 - **Other Utilities**:
   - `official-viewModel`: `2.8.0`
 
-## Screen Shots
+## Android Screen Shots
 
 | ![Screenshot 1](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/1.png) | ![Screenshot 2](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/2.png) | ![Screenshot 3](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/3.png) |
 | --- | --- | --- |
@@ -77,6 +77,15 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 ![Screenshot 13](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/13.png) | ![Screenshot 14](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/14.png) | ![Screenshot 15](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/15.png) |
 | --- | --- | --- |
 | ![Screenshot 16](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/16.png) |
+
+## iOS Screen Shots
+
+| ![Screenshot 1](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/55.png) | ![Screenshot 2](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/56.png) | ![Screenshot 3](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/57.png) |
+| --- | --- | --- |
+| ![Screenshot 4](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/58.png) | ![Screenshot 5](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/59.png) |  ![Screenshot 6](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/60.png) |
+| --- | --- | --- |
+| ![Screenshot 7](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/61.png) | ![Screenshot 8](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/62.png) |  | 
+| --- | --- | --- |
 
 ## Desktop Screen Shots
 
