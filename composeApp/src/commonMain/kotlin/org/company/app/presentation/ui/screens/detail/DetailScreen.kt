@@ -111,7 +111,7 @@ fun DetailContent(data: Data) {
                     )
                 },
                 modifier = Modifier.fillMaxWidth()
-                    .height(49.dp)
+                    .windowInsetsPadding(WindowInsets.statusBars)
             )
         }
     ) {
