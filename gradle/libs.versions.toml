@@ -17,7 +17,6 @@ kotlinx-coroutines = "1.9.0-RC"
 ktor = "2.3.12"
 kotlinx-serialization = "1.7.1"
 kotlinx-datetime = "0.6.0"
-koin = "3.5.6"
 sqlDelight = "2.0.2"
 size = "0.5.0"
 coil3 = "3.0.0-alpha06"
@@ -55,7 +54,6 @@ ktor-client-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 screen-size = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "size" }
 sqlDelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }

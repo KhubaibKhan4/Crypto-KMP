@@ -193,7 +193,7 @@ fun Chip(text: String) {
         shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.primary,
         contentColor = Color.White,
-        modifier = Modifier.clickable { /* Handle filter action */ }
+        modifier = Modifier.clickable {  }
     ) {
         Text(
             text = text,
