@@ -346,7 +346,7 @@ fun TopLosingContent(data: Data) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(10.dp),
+                .padding(start = 10.dp, end = 10.dp, top = 2.dp, bottom = 2.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
