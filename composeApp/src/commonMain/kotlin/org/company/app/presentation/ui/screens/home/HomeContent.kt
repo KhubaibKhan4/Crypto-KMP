@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Notifications
@@ -96,125 +98,123 @@ fun HomeContent(
             listingData = data
         }
     }
-
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "Track Coins",
-                        textAlign = TextAlign.Center,
-                        fontSize = MaterialTheme.typography.titleLarge.fontSize
-                    )
-                },
-                navigationIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.WbSunny,
-                        contentDescription = "Menu Icon",
-                        modifier = Modifier.clickable {
-                            isDark = !isDark
-                        }
-                    )
-                },
-                actions = {
-                    Icon(
-                        imageVector = Icons.Outlined.Notifications,
-                        contentDescription = "Menu Icon"
-                    )
-                },
-                modifier = Modifier.fillMaxWidth()
-                    .height(49.dp)
-            )
-        }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .pullRefresh(state = refreshState),
+        contentAlignment = Alignment.Center
     ) {
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .windowInsetsPadding(WindowInsets.statusBars)
-                .pullRefresh(state = refreshState)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(3.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Text(
+                    "Track Coins",
+                    textAlign = TextAlign.Center,
+                    fontSize = MaterialTheme.typography.titleMedium.fontSize
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                Icon(
+                    imageVector = Icons.Outlined.WbSunny,
+                    contentDescription = "Menu Icon",
+                    modifier = Modifier.clickable {
+                        isDark = !isDark
+                    }
+                )
+
+                Icon(
+                    imageVector = Icons.Outlined.Notifications,
+                    contentDescription = "Menu Icon"
+                )
+            }
+            TextField(
+                value = queryText,
+                onValueChange = {
+                    queryText = it
+                },
+                placeholder = { Text(text = "Search Coins") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        modifier = Modifier.padding(horizontal = 12.dp)
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = it.calculateTopPadding())
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                TextField(
-                    value = queryText,
-                    onValueChange = {
-                        queryText = it
-                    },
-                    placeholder = { Text(text = "Search Coins") },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = null,
-                            modifier = Modifier.padding(horizontal = 12.dp)
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp),
-                    colors = TextFieldDefaults.colors(
-                        focusedTextColor = if (isDark) Color.White else Color.Black,
-                        unfocusedTextColor = if (isDark) Color.White else Color.LightGray,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent
-                    ),
-                    shape = RoundedCornerShape(40.dp)
-                )
-                listingData?.data?.let { dataList ->
-                    if (queryText.isEmpty()){
-                        if (dataList.isNotEmpty()) {
-                            val combinedFilteredList = mutableListOf<Data>()
-                            if (dataList.size > 0) {
-                                combinedFilteredList.add(dataList[0])
-                            }
-                            if (dataList.size > 12) {
-                                combinedFilteredList.add(dataList[12])
-                            }
-
-                            CryptoList(
-                                dataList = combinedFilteredList,
-                                coinsText = "Favourite",
-                                viewText = "Large Cap",
-                                largeCapColor = Color(0xFFc127d9),
-                                isCapIconEnabled = true
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            SuggestionMessage()
-                            Spacer(modifier = Modifier.height(8.dp))
-                            CryptoList(
-                                dataList = dataList,
-                                coinsText = "All Coins",
-                                viewText = "View All"
-                            )
-                        } else {
-                            Text(text = "No data available.")
-                        }
-                    }else{
-                        val filteredList = dataList.filter { it.name.contains(queryText, ignoreCase = true) }
-                        if (filteredList.isNotEmpty()) {
-                            CryptoList(
-                                dataList = filteredList,
-                                coinsText = "Search Results",
-                                viewText = "View All"
-                            )
-                        } else {
-                            Text(text = "No matching results.")
-                        }
-                    }
-
-                }
-            }
-            PullRefreshIndicator(
-                refreshing = refreshing,
-                state = refreshState,
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
+                    .padding(10.dp),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = if (isDark) Color.White else Color.Black,
+                    unfocusedTextColor = if (isDark) Color.White else Color.LightGray,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+                ),
+                shape = RoundedCornerShape(40.dp)
             )
+            listingData?.data?.let { dataList ->
+                if (queryText.isEmpty()) {
+                    if (dataList.isNotEmpty()) {
+                        val combinedFilteredList = mutableListOf<Data>()
+                        if (dataList.size > 0) {
+                            combinedFilteredList.add(dataList[0])
+                        }
+                        if (dataList.size > 12) {
+                            combinedFilteredList.add(dataList[12])
+                        }
+
+                        CryptoList(
+                            dataList = combinedFilteredList,
+                            coinsText = "Favourite",
+                            viewText = "Large Cap",
+                            largeCapColor = Color(0xFFc127d9),
+                            isCapIconEnabled = true
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        SuggestionMessage()
+                        Spacer(modifier = Modifier.height(8.dp))
+                        CryptoList(
+                            dataList = dataList,
+                            coinsText = "All Coins",
+                            viewText = "View All"
+                        )
+                    } else {
+                        Text(text = "No data available.")
+                    }
+                } else {
+                    val filteredList =
+                        dataList.filter { it.name.contains(queryText, ignoreCase = true) }
+                    if (filteredList.isNotEmpty()) {
+                        CryptoList(
+                            dataList = filteredList,
+                            coinsText = "Search Results",
+                            viewText = "View All"
+                        )
+                    } else {
+                        Text(text = "No matching results.")
+                    }
+                }
+
+            }
+
         }
+        PullRefreshIndicator(
+            refreshing = refreshing,
+            state = refreshState,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+        )
     }
 }
