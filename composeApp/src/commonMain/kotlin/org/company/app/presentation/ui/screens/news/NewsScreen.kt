@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -107,18 +108,28 @@ fun NewsContent(
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize()
-        .windowInsetsPadding(WindowInsets.statusBars)) {
-        HeaderSection(newsList?.data)
-        Spacer(modifier = Modifier.height(16.dp))
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(300.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            newsList?.data?.let { listData ->
-                items(listData) {
-                    NewsItemView(it)
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+            .windowInsetsPadding(WindowInsets.statusBars)
+    ) {
+        item {
+            HeaderSection(newsList?.data)
+        }
+        item {
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+        item {
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(300.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+                    .height(900.dp)
+            ) {
+                newsList?.data?.let { listData ->
+                    items(listData) {
+                        NewsItemView(it)
+                    }
                 }
             }
         }
@@ -140,12 +151,6 @@ fun HeaderSection(newsList: List<Data>?, modifier: Modifier = Modifier) {
                     PromotionCardWithPager(shuffledNewsList)
                 }
             }
-        } else {
-            Text(
-                text = "No news available",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface
-            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -158,19 +163,21 @@ fun HeaderSection(newsList: List<Data>?, modifier: Modifier = Modifier) {
 fun QuickFilters(
     viewModel: MainViewModel = koinInject()
 ) {
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         viewModel.getNewsCategories()
     }
     val newsCategories by viewModel.newsCategories.collectAsState()
 
-    when(newsCategories){
+    when (newsCategories) {
         is ResultState.ERROR -> {
             val error = (newsCategories as ResultState.ERROR).message
             ErrorBox(error)
         }
+
         ResultState.LOADING -> {
-            LoadingBox()
+           // LoadingBox()
         }
+
         is ResultState.SUCCESS -> {
             val response = (newsCategories as ResultState.SUCCESS).response
             LazyRow(
@@ -193,7 +200,7 @@ fun Chip(text: String) {
         shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.primary,
         contentColor = Color.White,
-        modifier = Modifier.clickable {  }
+        modifier = Modifier.clickable { }
     ) {
         Text(
             text = text,
