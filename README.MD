@@ -60,7 +60,7 @@ Let's chat about potential projects, job opportunities, or any other collaborati
   - `kamelImage`: `0.9.4`
 - **Size Measurement**:
   - `size`: `0.3.1`
-- **Voyager Navigation**: `1.1.0-Beta`
+- **Voyager Navigation**: `1.1.0-Beta05`
 - **Other Utilities**:
   - `official-viewModel`: `2.8.0`
 
