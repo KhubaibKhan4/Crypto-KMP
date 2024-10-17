@@ -29,9 +29,9 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 
 - **Kotlin Multiplatform**: `2.0.0`
 - **AGP (Android Gradle Plugin)**: `8.2.2`
-- **Compose**: `1.6.11`
+- **Compose**: `1.7.0`
   - `androidx-appcompat`: `1.6.1`
-  - `androidx-activityCompose`: `1.9.0`
+  - `androidx-activityCompose`: `1.9.3`
   - `compose-uitooling`: `1.6.7`
   - `composeImageLoader`: `1.7.1`
   - `composeIcons`: `1.1.0`
