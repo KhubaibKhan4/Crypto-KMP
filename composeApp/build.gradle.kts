@@ -82,6 +82,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.annotations)
             implementation(libs.kamel.image)
+            implementation(libs.kamel.image.default)
             implementation(libs.chart)
             implementation(libs.bignum)
             implementation(libs.ktor.core)
