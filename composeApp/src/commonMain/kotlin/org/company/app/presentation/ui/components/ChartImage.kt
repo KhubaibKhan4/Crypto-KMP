@@ -2,6 +2,7 @@ package org.company.app.presentation.ui.components
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,20 +23,18 @@ fun ChartImage(
     val image: Resource<Painter> =
         asyncPainterResource("https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/$id.svg")
     KamelImage(
-        resource = image,
-        contentDescription = null,
+        { image }, contentDescription = null,
         modifier = modifier,
         contentScale = ContentScale.FillWidth,
-        animationSpec = tween(
-            durationMillis = 300,
-            delayMillis = 300,
-            easing = LinearOutSlowInEasing
-        ),
         colorFilter = ColorFilter.tint(color = tintColor),
         onLoading = {
             LinearProgressIndicator(
                 progress = { it },
             )
-        }
+        }, animationSpec = tween(
+            durationMillis = 300,
+            delayMillis = 300,
+            easing = LinearOutSlowInEasing
+        )
     )
 }

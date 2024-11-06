@@ -9,6 +9,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -96,18 +97,16 @@ fun PromotionCardWithPager(promotions: List<Data>) {
                         val image: Resource<Painter> =
                             asyncPainterResource(data = activePromotions[page].imageurl)
                         KamelImage(
-                            resource = image,
-                            contentDescription = null,
+                            { image }, contentDescription = null,
                             modifier = Modifier.fillMaxWidth(),
                             contentScale = ContentScale.Crop,
-                            animationSpec = tween(
+                            onLoading = {
+                                CircularProgressIndicator(progress = it)
+                            }, animationSpec = tween(
                                 durationMillis = 100,
                                 delayMillis = 100,
                                 easing = FastOutSlowInEasing
-                            ),
-                            onLoading = {
-                                CircularProgressIndicator(progress = it)
-                            }
+                            )
                         )
                     } else {
                         Box(

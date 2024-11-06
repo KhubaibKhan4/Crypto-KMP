@@ -20,10 +20,4 @@ fun CurrencyImage(
         modifier = modifier,
         contentScale = ContentScale.FillBounds
     )
-//    AsyncImage(
-//        model = "https://s2.coinmarketcap.com/static/img/coins/64x64/$id.png",
-//        contentDescription = null,
-//        modifier = modifier,
-//        contentScale = ContentScale.FillBounds,
-//    )
 }

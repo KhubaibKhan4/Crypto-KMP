@@ -241,8 +241,7 @@ fun NewsItemView(news: Data) {
                     )
             ) {
                 KamelImage(
-                    resource = image,
-                    contentDescription = null,
+                    { image }, contentDescription = null,
                     modifier = Modifier.matchParentSize(),
                     contentScale = ContentScale.Crop
                 )

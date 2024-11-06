@@ -86,8 +86,7 @@ fun NewsDetailContent(news: Data) {
     ) {
         val image: Resource<Painter> = asyncPainterResource(news.imageurl)
         KamelImage(
-            resource = image,
-            contentDescription = null,
+            { image }, contentDescription = null,
             modifier = Modifier
                 .height(250.dp)
                 .fillMaxWidth()
