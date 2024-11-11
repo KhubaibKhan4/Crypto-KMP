@@ -47,6 +47,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -86,9 +87,11 @@ fun DetailContent(data: Data) {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "",
+                        "${data.name}",
                         textAlign = TextAlign.Center,
-                        fontSize = MaterialTheme.typography.titleLarge.fontSize
+                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 },
                 navigationIcon = {
