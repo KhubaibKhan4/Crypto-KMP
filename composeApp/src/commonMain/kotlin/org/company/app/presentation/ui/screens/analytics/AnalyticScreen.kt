@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -39,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
@@ -335,8 +337,9 @@ fun TopLosingContent(data: Data) {
 
     Card(
         modifier = Modifier
-            .width(160.dp)
-            .height(90.dp)
+            .width(180.dp)
+            .height(120.dp)
+            .padding(6.dp)
             .shadow(4.dp, RoundedCornerShape(16.dp))
             .clickable {
                 navigator?.push(DetailScreen(data))
@@ -358,18 +361,26 @@ fun TopLosingContent(data: Data) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowDownward,
-                    contentDescription = "Loss",
-                    tint = textColor24h,
-                    modifier = Modifier.size(24.dp)
+                CurrencyImage(
+                    id = data.id,
+                    modifier = Modifier.size(30.dp)
+                        .clip(CircleShape)
                 )
-                Text(
-                    text = "${percentChange24h.roundToInt()}%",
-                    color = textColor24h,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                Spacer(modifier = Modifier.weight(1f))
+                Row {
+                    Icon(
+                        imageVector = Icons.Default.ArrowDownward,
+                        contentDescription = "Loss",
+                        tint = textColor24h,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Text(
+                        text = "${percentChange24h.roundToInt()}%",
+                        color = textColor24h,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
             Column(
                 horizontalAlignment = Alignment.Start
