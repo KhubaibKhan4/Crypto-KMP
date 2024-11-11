@@ -285,12 +285,23 @@ fun SummarySection(data: Data) {
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = "Market Overview",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = if (isDark) Color.White else Color.Black
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CurrencyImage(
+                    id = data.id,
+                    modifier = Modifier.size(30.dp)
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(
+                    text = "Market Overview",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = if (isDark) Color.White else Color.Black
+                )
+            }
             Spacer(modifier = Modifier.height(8.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -309,6 +320,7 @@ fun SummarySection(data: Data) {
                         color = if (isDark) Color.White else Color.Black
                     )
                 }
+                Spacer(modifier = Modifier.width(6.dp))
                 Column {
                     Text(
                         text = "24h Volume",
