@@ -1,6 +1,10 @@
 package org.company.app.presentation.ui.components
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -18,6 +22,14 @@ fun CurrencyImage(
     KamelImage(
         { image }, contentDescription = null,
         modifier = modifier,
-        contentScale = ContentScale.FillBounds
+        contentScale = ContentScale.FillBounds,
+        onLoading = {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(progress = {it})
+            }
+        }
     )
 }
