@@ -41,12 +41,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import io.kamel.core.Resource
+import io.kamel.image.asyncPainterResource
 import org.company.app.domain.model.crypto.Data
 import org.company.app.domain.model.crypto.LatestListing
 import org.company.app.domain.usecase.ResultState
@@ -435,20 +438,40 @@ fun TopMoversContent(data: Data) {
                 )
             }
             Column(
-                horizontalAlignment = Alignment.Start
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = "${data.symbol} $" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = data.name,
-                    fontSize = 12.sp,
-                    color = textColor.copy(alpha = 0.7f)
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CurrencyImage(
+                        id = data.id,
+                        modifier = Modifier.size(50.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "${data.symbol} $" + "${((data.quote.uSD.price * 100).roundToInt()) / 100.0}",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = textColor
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = data.name,
+                            fontSize = 12.sp,
+                            color = textColor.copy(alpha = 0.7f)
+                        )
+                    }
+
+                }
             }
         }
     }
