@@ -86,13 +86,24 @@ fun DetailContent(data: Data) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(
-                        "${data.name}",
-                        textAlign = TextAlign.Center,
-                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CurrencyImage(
+                            id = data.id,
+                            modifier = Modifier.size(30.dp)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            "${data.name}",
+                            textAlign = TextAlign.Center,
+                            fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 },
                 navigationIcon = {
                     Icon(
