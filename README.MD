@@ -106,6 +106,16 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 | ![Screenshot 11](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/53.png) |
 | ![Screenshot 12](https://github.com/KhubaibKhan4/Crypto-KMP/blob/master/assests/screenshots/54.png) |
 
+## Star History
+
+<a href="https://star-history.com/#KhubaibKhan4/Crypto-KMP&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=KhubaibKhan4/Crypto-KMP&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=KhubaibKhan4/Crypto-KMP&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=KhubaibKhan4/Crypto-KMP&type=Timeline" />
+ </picture>
+</a>
+
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
  - install JDK 17 or higher on your machine
