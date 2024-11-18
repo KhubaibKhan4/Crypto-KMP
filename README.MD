@@ -116,6 +116,14 @@ Let's chat about potential projects, job opportunities, or any other collaborati
  </picture>
 </a>
 
+**Stargazers**
+
+[![Stargazers repo roster for @KhubaibKhan4/Crypto-KMP](http://reporoster.com/stars/dark/KhubaibKhan4/Crypto-KMP)](https://github.com/KhubaibKhan4/Crypto-KMP/stargazers)
+
+**Forkers**
+
+[![Forkers repo roster for @KhubaibKhan4/Crypto-KMP](http://reporoster.com/forks/dark/KhubaibKhan4/Crypto-KMP)](https://github.com/KhubaibKhan4/Crypto-KMP/network/members)
+
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
  - install JDK 17 or higher on your machine
