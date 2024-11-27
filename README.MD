@@ -29,7 +29,7 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 
 - **Kotlin Multiplatform**: `2.0.0`
 - **AGP (Android Gradle Plugin)**: `8.2.2`
-- **Compose**: `1.7.0`
+- **Compose**: `1.7.1`
   - `androidx-appcompat`: `1.6.1`
   - `androidx-activityCompose`: `1.9.3`
   - `compose-uitooling`: `1.6.7`
@@ -49,9 +49,9 @@ Let's chat about potential projects, job opportunities, or any other collaborati
   - `compose-uitooling`: `1.6.3`
   - `composeIcons`: `1.1.0`
 - **Logging**:
-  - `napier`: `2.6.1`
+  - `napier`: `2.7.1`
 - **Database/Storage**:
-  - `sql-delight`: `2.0.1`
+  - `sql-delight`: `2.0.2`
 - **JSON Parsing**:
   - `json`: `1.6.3`
 - **Build Configurations**:
@@ -59,10 +59,10 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 - **Cross-Platform Image Loading**:
   - `kamelImage`: `0.9.4`
 - **Size Measurement**:
-  - `size`: `0.3.1`
+  - `size`: `0.4.1`
 - **Voyager Navigation**: `1.1.0-Beta05`
 - **Other Utilities**:
-  - `official-viewModel`: `2.8.0`
+  - `official-viewModel`: `2.8.4`
 
 ## Android Screen Shots
 
