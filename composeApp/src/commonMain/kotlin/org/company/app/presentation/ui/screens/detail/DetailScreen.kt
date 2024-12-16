@@ -128,11 +128,11 @@ fun DetailContent(data: Data) {
                     .windowInsetsPadding(WindowInsets.statusBars)
             )
         }
-    ) {
+    ) { paddingValues->
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .windowInsetsPadding(WindowInsets.statusBars)
+                .padding(top = paddingValues.calculateTopPadding())
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
