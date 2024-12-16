@@ -1,5 +1,7 @@
 package org.company.app.presentation.ui.screens.detail
 
+import Notification
+import NotificationType
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +11,6 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
@@ -53,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import createNotification
 import org.company.app.domain.model.crypto.Data
 import org.company.app.presentation.ui.components.CryptoChart
 import org.company.app.presentation.ui.components.CurrencyImage
@@ -73,6 +75,7 @@ class DetailScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailContent(data: Data) {
+    val notification = createNotification(NotificationType.TOP)
     var selectedPeriod by remember { mutableStateOf("1H") }
     val capList = remember { mutableListOf("1H", "1D", "1W", "1M", "3M", "6M", "1Y") }
     val isDark by LocalThemeIsDark.current
@@ -117,7 +120,14 @@ fun DetailContent(data: Data) {
                 actions = {
                     Icon(
                         imageVector = Icons.Outlined.Notifications,
-                        contentDescription = "Notifications Icon"
+                        contentDescription = "Notifications Icon",
+                        modifier = Modifier.clickable {
+                            notification.show(
+                                message ="CMC Rank:"+data.cmcRank.toString() +"Name:"+data.name + "Currency:" +data.quote.uSD,
+                                title = data.name,
+                                duration = NotificationDuration.SHORT
+                            )
+                        }
                     )
                     Icon(
                         imageVector = Icons.Outlined.StarOutline,
