@@ -1,5 +1,6 @@
 [versions]
 
+alertKmp = "2.0.0"
 bignum = "0.3.9"
 chart = "Beta-0.0.5"
 kamelImage = "1.0.1"
@@ -24,6 +25,7 @@ coil3 = "3.0.0-alpha08"
 
 [libraries]
 
+alert-kmp = { module = "io.github.khubaibkhan4:alert-kmp", version.ref = "alertKmp" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
 androidx-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
