@@ -32,6 +32,7 @@ Let's chat about potential projects, job opportunities, or any other collaborati
 - **Compose**: `1.7.1`
   - `androidx-appcompat`: `1.6.1`
   - `androidx-activityCompose`: `1.9.3`
+  - `ui-testing`: `1.7.6`
   - `compose-uitooling`: `1.6.7`
   - `composeImageLoader`: `1.7.1`
   - `composeIcons`: `1.1.0`
